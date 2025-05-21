@@ -1,0 +1,84 @@
+<!-- templates/trading.html -->
+{% extends "base.html" %}
+
+{% block title %}Trading - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Trading</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Centralized Exchange (CEX)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Access centralized exchange market making tools and strategies. Optimize your trading on major CEX platforms with advanced AI-powered algorithms.
+                    </p>
+                    <ul>
+                        <li>Multi-exchange support</li>
+                        <li>Custom market making strategies</li>
+                        <li>Inventory management</li>
+                        <li>Risk controls and safety features</li>
+                    </ul>
+                    <a href="{{ url_for('cex_mm') }}" class="btn btn-primary">
+                        <i class="bi bi-building"></i> Go to CEX Market Making
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Decentralized Exchange (DEX)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Implement decentralized exchange market making strategies with optimized gas management and yield optimization.
+                    </p>
+                    <ul>
+                        <li>Multi-chain support</li>
+                        <li>Gas-optimized strategies</li>
+                        <li>Advanced MEV protection</li>
+                        <li>Impermanent loss management</li>
+                    </ul>
+                    <a href="{{ url_for('dex_mm') }}" class="btn btn-success">
+                        <i class="bi bi-box"></i> Go to DEX Market Making
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Trading Features</h5>
+        </div>
+        <div class="card-body">
+            <p>BlockAI Pure MM provides comprehensive trading tools for both centralized and decentralized exchanges:</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h6><i class="bi bi-graph-up"></i> Market Making</h6>
+                    <p>Create and manage limit orders to provide liquidity and earn from bid-ask spreads.</p>
+                </div>
+                <div class="col-md-6">
+                    <h6><i class="bi bi-shuffle"></i> Arbitrage</h6>
+                    <p>Identify and capitalize on price differences between exchanges or trading pairs.</p>
+                </div>
+                <div class="col-md-6">
+                    <h6><i class="bi bi-shield-check"></i> Risk Management</h6>
+                    <p>Implement stop-loss, take-profit, and inventory management strategies.</p>
+                </div>
+                <div class="col-md-6">
+                    <h6><i class="bi bi-robot"></i> AI Optimization</h6>
+                    <p>Leverage BlockAI algorithms to optimize your trading strategies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

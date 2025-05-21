@@ -1,0 +1,825 @@
+/* BlockAI specific styles */
+:root {
+    /* Light mode variables */
+    --primary-color: #4488ff;
+    --primary-hover: #3377ee;
+    --primary-active: #2266dd;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --text-light: #f8f9fa;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --nav-bg: #343a40;
+    --jumbotron-bg: #212529;
+    --footer-bg: #343a40;
+    --border-color: #dee2e6;
+    --hover-bg: rgba(68, 136, 255, 0.1);
+    --active-bg: rgba(68, 136, 255, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color-hover: rgba(0, 0, 0, 0.15);
+    --status-running: #00db87;
+    --status-stopped: #ff4d4d;
+    --status-paused: #ffcc00;
+    --log-info: #4da6ff;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #4488ff;
+        --primary-hover: #3377ee;
+        --primary-active: #2266dd;
+        --text-color: #f8f9fa;
+        --text-muted: #adb5bd;
+        --text-light: #f8f9fa;
+        --bg-color: #121212;
+        --card-bg: #2a2a2a;
+        --input-bg: #333;
+        --input-border: #444;
+        --nav-bg: #212529;
+        --jumbotron-bg: #1a1a1a;
+        --footer-bg: #212529;
+        --border-color: #444;
+        --hover-bg: rgba(68, 136, 255, 0.15);
+        --active-bg: rgba(68, 136, 255, 0.25);
+        --shadow-color: rgba(0, 0, 0, 0.2);
+        --shadow-color-hover: rgba(0, 0, 0, 0.3);
+        --status-running: #00db87;
+        --status-stopped: #ff4d4d;
+        --status-paused: #ffcc00;
+        --log-info: #4da6ff;
+    }
+}
+
+/* Apply variables across the site */
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.blockai-accent {
+    color: var(--primary-color);
+}
+
+/* Card styling */
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color-hover);
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+
+/* Form controls */
+.form-control, .form-select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--input-border);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(68, 136, 255, 0.25);
+}
+
+/* Style for blockchain selector */
+#chainSelector {
+    background-color: var(--nav-bg);
+    color: var(--text-light);
+    border-color: var(--border-color);
+}
+
+#chainSelector:focus {
+    border-color: var(--primary-color);
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-hover);
+    color: var(--text-light);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-active);
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Improve the alert boxes */
+.alert {
+    border-radius: 8px;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+    background-color: var(--jumbotron-bg);
+    color: var(--text-light);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.jumbotron:hover {
+    box-shadow: 0 8px 15px var(--shadow-color-hover);
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--nav-bg);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--text-light) !important;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color) !important;
+}
+
+.nav-link.active {
+    background-color: var(--active-bg);
+    color: var(--primary-color) !important;
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--text-light);
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+/* Toast notifications */
+#toast-container {
+    z-index: 1050;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+.toast {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Form validation styling */
+.was-validated .form-control:valid, .form-control.is-valid {
+    border-color: #198754;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Loading spinner colors */
+.spinner-border.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Wallet display tables */
+.table-wallets {
+    color: var(--text-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-wallets th {
+    background-color: var(--nav-bg);
+    color: var(--text-light);
+    border-color: var(--border-color);
+}
+
+.table-wallets td {
+    border-color: var(--border-color);
+}
+
+.wallet-address {
+    font-family: monospace;
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    display: inline-block;
+}
+
+/* Copy button styling */
+.btn-copy {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    margin-left: 8px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-copy:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Custom file input styling */
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Select file';
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 4px;
+    padding: 6px 12px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.custom-file-input:hover::before {
+    background-color: var(--primary-hover);
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loading-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Blockchain-specific color accents */
+.ethereum-accent {
+    color: #627EEA; /* Ethereum blue */
+}
+
+.bsc-accent {
+    color: #F3BA2F; /* BSC yellow */
+}
+
+.solana-accent {
+    color: #00FFA3; /* Solana green */
+}
+
+.base-accent {
+    color: #0052FF; /* Base blue */
+}
+
+.sui-accent {
+    color: #6DCEF5; /* SUI light blue */
+}
+
+/* Blockchain-specific button and header styles */
+.btn-ethereum, .bg-ethereum {
+    background-color: #627EEA !important;
+    border-color: #5670da !important;
+    color: white !important;
+}
+
+.btn-bsc, .bg-bsc {
+    background-color: #F3BA2F !important;
+    border-color: #e3aa1f !important;
+    color: #212529 !important;
+}
+
+.btn-base, .bg-base {
+    background-color: #0052FF !important;
+    border-color: #0047e0 !important;
+    color: white !important;
+}
+
+.btn-solana, .bg-solana {
+    background-color: #00FFA3 !important;
+    border-color: #00e093 !important;
+    color: #212529 !important;
+}
+
+.btn-sui, .bg-sui {
+    background-color: #6DCEF5 !important;
+    border-color: #5dbed5 !important;
+    color: #212529 !important;
+}
+
+/* Blockchain badge styles */
+.badge-ethereum {
+    background-color: #627EEA;
+    color: white;
+}
+
+.badge-bsc {
+    background-color: #F3BA2F;
+    color: #212529;
+}
+
+.badge-base {
+    background-color: #0052FF;
+    color: white;
+}
+
+.badge-solana {
+    background-color: #00FFA3;
+    color: #212529;
+}
+
+.badge-sui {
+    background-color: #6DCEF5;
+    color: #212529;
+}
+
+/* Status indicators */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-running {
+    background-color: var(--status-running);
+}
+
+.status-stopped {
+    background-color: var(--status-stopped);
+}
+
+.status-paused {
+    background-color: var(--status-paused);
+}
+
+/* Animation for status changes */
+@keyframes statusChange {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.status-changing {
+    animation: statusChange 1.5s infinite;
+}
+
+/* Transaction and feature logs */
+.transaction-log, .feature-log {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #1a1a1a;
+    color: #f8f8f8;
+    font-family: monospace;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.log-entry {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.log-success {
+    color: var(--status-running);
+}
+
+.log-error {
+    color: var(--status-stopped);
+}
+
+.log-warning {
+    color: var(--status-paused);
+}
+
+.log-info {
+    color: var(--log-info);
+}
+
+/* Settings icon styling */
+.settings-link {
+    display: inline-block;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.settings-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+}
+
+.settings-link i {
+    display: block;
+    color: var(--text-light);
+}
+
+/* Settings page-specific styles */
+#blockchainTabs .nav-link {
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    border: 1px solid transparent;
+}
+
+#blockchainTabs .nav-link.active {
+    color: var(--primary-color) !important;
+    background-color: transparent;
+    border-color: var(--border-color) var(--border-color) var(--card-bg);
+}
+
+#blockchainTabs .nav-link:hover:not(.active) {
+    border-color: transparent;
+    background-color: var(--hover-bg);
+}
+
+/* Blockchain-specific tab styling */
+#ethereum-tab.active {
+    color: #627EEA !important;
+    border-bottom-color: #627EEA !important;
+}
+
+#bsc-tab.active {
+    color: #F3BA2F !important;
+    border-bottom-color: #F3BA2F !important;
+}
+
+#base-tab.active {
+    color: #0052FF !important;
+    border-bottom-color: #0052FF !important;
+}
+
+#solana-tab.active {
+    color: #00FFA3 !important;
+    border-bottom-color: #00FFA3 !important;
+}
+
+#sui-tab.active {
+    color: #6DCEF5 !important;
+    border-bottom-color: #6DCEF5 !important;
+}
+
+/* Password field icon for showing/hiding */
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.password-toggle:hover {
+    color: var(--text-color);
+}
+
+/* Form group with position relative for password fields */
+.password-field-container {
+    position: relative;
+}
+
+/* Table specific styles for dark mode */
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Button variants */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: var(--text-light);
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+    color: var(--text-light);
+}
+
+.btn-success:hover {
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: var(--text-light);
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+/* Ensure links have proper contrast */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Ensure modal content is visible */
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.modal-header, .modal-footer {
+    border-color: var(--border-color);
+}
+
+.close {
+    color: var(--text-color);
+}
+
+/* Accordion styles */
+.accordion-button {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+.accordion-body {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-color);
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+}
+
+/* MEXC theme */
+.bg-mexc {
+    background-color: #6441A4;
+    color: white;
+}
+
+.btn-mexc {
+    background-color: #6441A4;
+    color: white;
+}
+
+.btn-mexc:hover {
+    background-color: #5c3a96;
+    color: white;
+}
+
+.mexc-color {
+    color: #6441A4;
+}
+
+/* Tab styling for instances */
+.instance-tab {
+    cursor: pointer;
+}
+
+.instance-tab.active {
+    font-weight: bold;
+    background-color: #6441A4 !important;
+    border-color: #6441A4 !important;
+}
+
+.tab-instance {
+    display: none;
+}
+
+.tab-instance.active {
+    display: block;
+}
+
+/* Form sections */
+.section-switch {
+    padding: 10px 0;
+    margin: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+/* Toggle */
+.form-check-input:checked {
+    background-color: #6441A4;
+    border-color: #6441A4;
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.custom-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.custom-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Feature state display */
+.feature-state {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.feature-state-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.feature-state-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.feature-state-timestamp {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.feature-state-content {
+    margin-top: 10px;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .jumbotron {
+        text-align: center;
+    }
+    
+    .navbar-brand {
+        margin-left: 0;
+    }
+    
+    .wallet-address {
+        max-width: 150px;
+    }
+    
+    .transaction-log, .feature-log {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .wallet-address {
+        max-width: 120px;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .status-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Force light text on dark backgrounds even in light mode */
+.bg-dark, .navbar-dark {
+    color: #f8f9fa !important;
+}
+
+.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4, .bg-dark h5, .bg-dark h6,
+.navbar-dark h1, .navbar-dark h2, .navbar-dark h3, .navbar-dark h4, .navbar-dark h5, .navbar-dark h6 {
+    color: #f8f9fa !important;
+}
+
+.bg-dark p, .bg-dark span, .bg-dark div,
+.navbar-dark p, .navbar-dark span, .navbar-dark div {
+    color: #f8f9fa !important;
+}
+
+/* Force contrast for all text */
+body {
+    color-scheme: light dark;
+}
+
+/* Additional dark mode contrast helpers */
+@media (prefers-color-scheme: dark) {
+    .border {
+        border-color: var(--border-color) !important;
+    }
+    
+    .text-muted {
+        color: var(--text-muted) !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-color);
+    }
+    
+    /* Ensure high contrast for input placeholders */
+    ::placeholder {
+        color: var(--text-muted) !important;
+        opacity: 0.7 !important;
+    }
+    
+    /* Ensure code blocks are visible */
+    pre, code {
+        background-color: #333;
+        color: #f8f9fa;
+        border-color: #444;
+    }
+}

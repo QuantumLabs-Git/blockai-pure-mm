@@ -1,0 +1,155 @@
+<!-- templates/cex_mm.html -->
+{% extends "base.html" %}
+
+{% block title %}CEX Market Making - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">
+        <i class="bi bi-building"></i> CEX Market Making
+        <small class="text-muted fs-6">Centralized Exchange Market Making Strategies</small>
+    </h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-purple text-white" style="background-color: #6441A4;">
+                    <h5 class="mb-0">MEXC Exchange</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Set up advanced market making strategies for MEXC exchange with customizable parameters.
+                    </p>
+                    <ul>
+                        <li>Multi-level order books</li>
+                        <li>Inventory skew management</li>
+                        <li>Volatility-adjusted spreads</li>
+                        <li>Multiple risk management options</li>
+                    </ul>
+                    <a href="{{ url_for('mexc') }}" class="btn btn-primary">
+                        <i class="bi bi-graph-up"></i> MEXC Market Maker
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Binance (Coming Soon)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Market making tools for Binance exchange will be available soon.
+                    </p>
+                    <button class="btn btn-secondary" disabled>
+                        <i class="bi bi-lock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">OKX (Coming Soon)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Market making tools for OKX exchange will be available soon.
+                    </p>
+                    <button class="btn btn-secondary" disabled>
+                        <i class="bi bi-lock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Bybit (Coming Soon)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Market making tools for Bybit exchange will be available soon.
+                    </p>
+                    <button class="btn btn-secondary" disabled>
+                        <i class="bi bi-lock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">KuCoin (Coming Soon)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Market making tools for KuCoin exchange will be available soon.
+                    </p>
+                    <button class="btn btn-secondary" disabled>
+                        <i class="bi bi-lock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Gate.io (Coming Soon)</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Market making tools for Gate.io exchange will be available soon.
+                    </p>
+                    <button class="btn btn-secondary" disabled>
+                        <i class="bi bi-lock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mt-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">CEX Market Making Features</h5>
+        </div>
+        <div class="card-body">
+            <p>Our CEX market making tools provide comprehensive features for professional market makers:</p>
+            
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <h6><i class="bi bi-layers"></i> Multi-Level Order Books</h6>
+                    <p>Create orders at multiple price levels with customizable spreads and sizes.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6><i class="bi bi-shield-check"></i> Risk Management</h6>
+                    <p>Implement stop-loss, take-profit, and inventory management strategies.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6><i class="bi bi-lightning"></i> High Performance</h6>
+                    <p>Low-latency execution and efficient order management.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6><i class="bi bi-graph-up"></i> Spread Management</h6>
+                    <p>Dynamic spread adjustment based on market conditions and volatility.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6><i class="bi bi-calendar-check"></i> Trading Hours</h6>
+                    <p>Set specific trading hours to limit market making activities.</p>
+                </div>
+                <div class="col-md-4">
+                    <h6><i class="bi bi-boxes"></i> Multi-Instance</h6>
+                    <p>Run multiple market making instances with different parameters simultaneously.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

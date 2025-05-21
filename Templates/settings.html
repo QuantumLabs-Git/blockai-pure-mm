@@ -1,0 +1,427 @@
+<!-- templates/settings.html -->
+{% extends "base.html" %}
+
+{% block title %}Settings - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Settings</h1>
+    
+    <!-- Blockchain API Settings -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Blockchain API Settings</h5>
+        </div>
+        <div class="card-body">
+            <form id="blockchainApiForm">
+                <!-- Tabs for different blockchains -->
+                <ul class="nav nav-tabs mb-3" id="blockchainTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="ethereum-tab" data-bs-toggle="tab" data-bs-target="#ethereum-content" type="button" role="tab" aria-controls="ethereum-content" aria-selected="true">Ethereum</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="bsc-tab" data-bs-toggle="tab" data-bs-target="#bsc-content" type="button" role="tab" aria-controls="bsc-content" aria-selected="false">BSC</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="base-tab" data-bs-toggle="tab" data-bs-target="#base-content" type="button" role="tab" aria-controls="base-content" aria-selected="false">Base</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="solana-tab" data-bs-toggle="tab" data-bs-target="#solana-content" type="button" role="tab" aria-controls="solana-content" aria-selected="false">Solana</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="sui-tab" data-bs-toggle="tab" data-bs-target="#sui-content" type="button" role="tab" aria-controls="sui-content" aria-selected="false">SUI</button>
+                    </li>
+                </ul>
+                
+                <!-- Tab content for each blockchain -->
+                <div class="tab-content" id="blockchainTabsContent">
+                    <!-- Ethereum Settings -->
+                    <div class="tab-pane fade show active" id="ethereum-content" role="tabpanel" aria-labelledby="ethereum-tab">
+                        <div class="mb-3">
+                            <label for="ethereumRpcUrl" class="form-label">Ethereum RPC URL</label>
+                            <input type="url" class="form-control" id="ethereumRpcUrl" name="ethereumRpcUrl" placeholder="https://mainnet.infura.io/v3/YOUR-API-KEY">
+                            <div class="form-text">Your Ethereum JSON-RPC API endpoint</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ethereumWebSocketUrl" class="form-label">Ethereum WebSocket URL</label>
+                            <input type="url" class="form-control" id="ethereumWebSocketUrl" name="ethereumWebSocketUrl" placeholder="wss://mainnet.infura.io/ws/v3/YOUR-API-KEY">
+                            <div class="form-text">Your Ethereum WebSocket endpoint (optional)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ethereumApiKey" class="form-label">API Key</label>
+                            <input type="password" class="form-control" id="ethereumApiKey" name="ethereumApiKey" placeholder="Your API Key">
+                            <div class="form-text">Your Ethereum API key (if required)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ethereumExplorerUrl" class="form-label">Block Explorer URL</label>
+                            <input type="url" class="form-control" id="ethereumExplorerUrl" name="ethereumExplorerUrl" value="https://etherscan.io">
+                            <div class="form-text">Ethereum block explorer URL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- BSC Settings -->
+                    <div class="tab-pane fade" id="bsc-content" role="tabpanel" aria-labelledby="bsc-tab">
+                        <div class="mb-3">
+                            <label for="bscRpcUrl" class="form-label">BSC RPC URL</label>
+                            <input type="url" class="form-control" id="bscRpcUrl" name="bscRpcUrl" placeholder="https://bsc-dataseed.binance.org/">
+                            <div class="form-text">Your BSC JSON-RPC API endpoint</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bscWebSocketUrl" class="form-label">BSC WebSocket URL</label>
+                            <input type="url" class="form-control" id="bscWebSocketUrl" name="bscWebSocketUrl" placeholder="wss://bsc-ws-node.nariox.org:443">
+                            <div class="form-text">Your BSC WebSocket endpoint (optional)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bscApiKey" class="form-label">API Key</label>
+                            <input type="password" class="form-control" id="bscApiKey" name="bscApiKey" placeholder="Your API Key">
+                            <div class="form-text">Your BSC API key (if required)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bscExplorerUrl" class="form-label">Block Explorer URL</label>
+                            <input type="url" class="form-control" id="bscExplorerUrl" name="bscExplorerUrl" value="https://bscscan.com">
+                            <div class="form-text">BSC block explorer URL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Base Settings -->
+                    <div class="tab-pane fade" id="base-content" role="tabpanel" aria-labelledby="base-tab">
+                        <div class="mb-3">
+                            <label for="baseRpcUrl" class="form-label">Base RPC URL</label>
+                            <input type="url" class="form-control" id="baseRpcUrl" name="baseRpcUrl" placeholder="https://mainnet.base.org">
+                            <div class="form-text">Your Base JSON-RPC API endpoint</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="baseWebSocketUrl" class="form-label">Base WebSocket URL</label>
+                            <input type="url" class="form-control" id="baseWebSocketUrl" name="baseWebSocketUrl" placeholder="wss://mainnet.base.org">
+                            <div class="form-text">Your Base WebSocket endpoint (optional)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="baseApiKey" class="form-label">API Key</label>
+                            <input type="password" class="form-control" id="baseApiKey" name="baseApiKey" placeholder="Your API Key">
+                            <div class="form-text">Your Base API key (if required)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="baseExplorerUrl" class="form-label">Block Explorer URL</label>
+                            <input type="url" class="form-control" id="baseExplorerUrl" name="baseExplorerUrl" value="https://basescan.org">
+                            <div class="form-text">Base block explorer URL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Solana Settings -->
+                    <div class="tab-pane fade" id="solana-content" role="tabpanel" aria-labelledby="solana-tab">
+                        <div class="mb-3">
+                            <label for="solanaRpcUrl" class="form-label">Solana RPC URL</label>
+                            <input type="url" class="form-control" id="solanaRpcUrl" name="solanaRpcUrl" placeholder="https://api.mainnet-beta.solana.com">
+                            <div class="form-text">Your Solana JSON-RPC API endpoint</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="solanaWebSocketUrl" class="form-label">Solana WebSocket URL</label>
+                            <input type="url" class="form-control" id="solanaWebSocketUrl" name="solanaWebSocketUrl" placeholder="wss://api.mainnet-beta.solana.com">
+                            <div class="form-text">Your Solana WebSocket endpoint (optional)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="solanaApiKey" class="form-label">API Key</label>
+                            <input type="password" class="form-control" id="solanaApiKey" name="solanaApiKey" placeholder="Your API Key">
+                            <div class="form-text">Your Solana API key (if required)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="solanaExplorerUrl" class="form-label">Block Explorer URL</label>
+                            <input type="url" class="form-control" id="solanaExplorerUrl" name="solanaExplorerUrl" value="https://explorer.solana.com">
+                            <div class="form-text">Solana block explorer URL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- SUI Settings -->
+                    <div class="tab-pane fade" id="sui-content" role="tabpanel" aria-labelledby="sui-tab">
+                        <div class="mb-3">
+                            <label for="suiRpcUrl" class="form-label">SUI RPC URL</label>
+                            <input type="url" class="form-control" id="suiRpcUrl" name="suiRpcUrl" placeholder="https://fullnode.mainnet.sui.io:443">
+                            <div class="form-text">Your SUI JSON-RPC API endpoint</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="suiWebSocketUrl" class="form-label">SUI WebSocket URL</label>
+                            <input type="url" class="form-control" id="suiWebSocketUrl" name="suiWebSocketUrl" placeholder="wss://fullnode.mainnet.sui.io:443">
+                            <div class="form-text">Your SUI WebSocket endpoint (optional)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="suiApiKey" class="form-label">API Key</label>
+                            <input type="password" class="form-control" id="suiApiKey" name="suiApiKey" placeholder="Your API Key">
+                            <div class="form-text">Your SUI API key (if required)</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="suiExplorerUrl" class="form-label">Block Explorer URL</label>
+                            <input type="url" class="form-control" id="suiExplorerUrl" name="suiExplorerUrl" value="https://explorer.sui.io">
+                            <div class="form-text">SUI block explorer URL</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Save Button -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                    <button type="button" class="btn btn-secondary ms-2" id="resetSettings">Reset to Defaults</button>
+                </div>
+            </form>
+            
+            <!-- Alert for success/error messages -->
+            <div id="settingsAlert" class="alert mt-3" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <!-- Additional Settings -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Application Settings</h5>
+        </div>
+        <div class="card-body">
+            <form id="appSettingsForm">
+                <!-- Theme Settings -->
+                <div class="mb-3">
+                    <label for="appTheme" class="form-label">Application Theme</label>
+                    <select class="form-select" id="appTheme" name="appTheme">
+                        <option value="dark">Dark Theme</option>
+                        <option value="light">Light Theme</option>
+                        <option value="system">Follow System</option>
+                    </select>
+                    <div class="form-text">Select your preferred application theme</div>
+                </div>
+                
+                <!-- Gas Price Settings -->
+                <div class="mb-3">
+                    <label for="defaultGasMultiplier" class="form-label">Default Gas Price Multiplier</label>
+                    <input type="number" class="form-control" id="defaultGasMultiplier" name="defaultGasMultiplier" step="0.1" min="1" value="1.1">
+                    <div class="form-text">Multiplier for automatic gas price calculation (1.1 = 10% above market price)</div>
+                </div>
+                
+                <!-- Transaction Confirmation Settings -->
+                <div class="mb-3">
+                    <label for="txConfirmations" class="form-label">Transaction Confirmations</label>
+                    <input type="number" class="form-control" id="txConfirmations" name="txConfirmations" min="1" value="3">
+                    <div class="form-text">Number of confirmations required for a transaction to be considered final</div>
+                </div>
+                
+                <!-- Save Button -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                    <button type="button" class="btn btn-secondary ms-2" id="resetAppSettings">Reset to Defaults</button>
+                </div>
+            </form>
+            
+            <!-- Alert for success/error messages -->
+            <div id="appSettingsAlert" class="alert mt-3" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <!-- Security Settings -->
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Security Settings</h5>
+        </div>
+        <div class="card-body">
+            <form id="securitySettingsForm">
+                <!-- Auto-lock Settings -->
+                <div class="mb-3">
+                    <label for="autoLockTimeout" class="form-label">Auto-lock Timeout (minutes)</label>
+                    <input type="number" class="form-control" id="autoLockTimeout" name="autoLockTimeout" min="0" value="15">
+                    <div class="form-text">Time of inactivity before locking wallet access (0 to disable)</div>
+                </div>
+                
+                <!-- Remember Wallet Selection -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberWallets" name="rememberWallets" checked>
+                    <label class="form-check-label" for="rememberWallets">Remember selected wallets</label>
+                    <div class="form-text">Store your last used wallet addresses locally</div>
+                </div>
+                
+                <!-- Save Private Keys Locally -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="storePrivateKeys" name="storePrivateKeys">
+                    <label class="form-check-label" for="storePrivateKeys">Store encrypted private keys locally</label>
+                    <div class="form-text">Store encrypted private keys in your browser (requires password)</div>
+                </div>
+                
+                <!-- Encryption Password -->
+                <div class="mb-3" id="encryptionPasswordGroup" style="display: none;">
+                    <label for="encryptionPassword" class="form-label">Encryption Password</label>
+                    <input type="password" class="form-control" id="encryptionPassword" name="encryptionPassword">
+                    <div class="form-text">Password for encrypting private keys (never stored or sent to server)</div>
+                </div>
+                
+                <!-- Save Button -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                    <button type="button" class="btn btn-secondary ms-2" id="resetSecuritySettings">Reset to Defaults</button>
+                </div>
+            </form>
+            
+            <!-- Alert for success/error messages -->
+            <div id="securitySettingsAlert" class="alert mt-3" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to load settings from localStorage
+        function loadSettings() {
+            // Blockchain API settings
+            for (const blockchain of ['ethereum', 'bsc', 'base', 'solana', 'sui']) {
+                for (const type of ['RpcUrl', 'WebSocketUrl', 'ApiKey', 'ExplorerUrl']) {
+                    const key = blockchain + type;
+                    const value = localStorage.getItem(key);
+                    if (value) {
+                        document.getElementById(key).value = value;
+                    }
+                }
+            }
+            
+            // Application settings
+            const appTheme = localStorage.getItem('appTheme') || 'dark';
+            document.getElementById('appTheme').value = appTheme;
+            
+            const gasMultiplier = localStorage.getItem('defaultGasMultiplier') || '1.1';
+            document.getElementById('defaultGasMultiplier').value = gasMultiplier;
+            
+            const txConfirmations = localStorage.getItem('txConfirmations') || '3';
+            document.getElementById('txConfirmations').value = txConfirmations;
+            
+            // Security settings
+            const autoLockTimeout = localStorage.getItem('autoLockTimeout') || '15';
+            document.getElementById('autoLockTimeout').value = autoLockTimeout;
+            
+            const rememberWallets = localStorage.getItem('rememberWallets') !== 'false';
+            document.getElementById('rememberWallets').checked = rememberWallets;
+            
+            const storePrivateKeys = localStorage.getItem('storePrivateKeys') === 'true';
+            document.getElementById('storePrivateKeys').checked = storePrivateKeys;
+            
+            // Show encryption password field if storing private keys
+            document.getElementById('encryptionPasswordGroup').style.display = 
+                storePrivateKeys ? 'block' : 'none';
+        }
+        
+        // Function to show alert message
+        function showAlert(id, message, type = 'success') {
+            const alertElement = document.getElementById(id);
+            alertElement.className = `alert alert-${type} mt-3`;
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
+            
+            // Hide the alert after 5 seconds
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Load saved settings
+        loadSettings();
+        
+        // Handle blockchain API settings form submission
+        document.getElementById('blockchainApiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Save blockchain settings to localStorage
+            for (const blockchain of ['ethereum', 'bsc', 'base', 'solana', 'sui']) {
+                for (const type of ['RpcUrl', 'WebSocketUrl', 'ApiKey', 'ExplorerUrl']) {
+                    const key = blockchain + type;
+                    const value = document.getElementById(key).value;
+                    localStorage.setItem(key, value);
+                }
+            }
+            
+            showAlert('settingsAlert', 'Blockchain API settings saved successfully!');
+        });
+        
+        // Handle application settings form submission
+        document.getElementById('appSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Save app settings to localStorage
+            const appTheme = document.getElementById('appTheme').value;
+            localStorage.setItem('appTheme', appTheme);
+            
+            const gasMultiplier = document.getElementById('defaultGasMultiplier').value;
+            localStorage.setItem('defaultGasMultiplier', gasMultiplier);
+            
+            const txConfirmations = document.getElementById('txConfirmations').value;
+            localStorage.setItem('txConfirmations', txConfirmations);
+            
+            showAlert('appSettingsAlert', 'Application settings saved successfully!');
+        });
+        
+        // Handle security settings form submission
+        document.getElementById('securitySettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Save security settings to localStorage
+            const autoLockTimeout = document.getElementById('autoLockTimeout').value;
+            localStorage.setItem('autoLockTimeout', autoLockTimeout);
+            
+            const rememberWallets = document.getElementById('rememberWallets').checked;
+            localStorage.setItem('rememberWallets', rememberWallets);
+            
+            const storePrivateKeys = document.getElementById('storePrivateKeys').checked;
+            localStorage.setItem('storePrivateKeys', storePrivateKeys);
+            
+            // Only check password if storing private keys
+            if (storePrivateKeys) {
+                const password = document.getElementById('encryptionPassword').value;
+                if (!password) {
+                    showAlert('securitySettingsAlert', 'Please provide an encryption password.', 'danger');
+                    return;
+                }
+                // We don't store the password, but we could set a flag that it was provided
+                localStorage.setItem('hasEncryptionPassword', 'true');
+            }
+            
+            showAlert('securitySettingsAlert', 'Security settings saved successfully!');
+        });
+        
+        // Toggle encryption password visibility based on checkbox
+        document.getElementById('storePrivateKeys').addEventListener('change', function() {
+            document.getElementById('encryptionPasswordGroup').style.display = 
+                this.checked ? 'block' : 'none';
+        });
+        
+        // Reset buttons
+        document.getElementById('resetSettings').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset blockchain API settings to defaults?')) {
+                for (const blockchain of ['ethereum', 'bsc', 'base', 'solana', 'sui']) {
+                    for (const type of ['RpcUrl', 'WebSocketUrl', 'ApiKey', 'ExplorerUrl']) {
+                        const key = blockchain + type;
+                        localStorage.removeItem(key);
+                    }
+                }
+                // Reload the form
+                loadSettings();
+                showAlert('settingsAlert', 'Blockchain API settings reset to defaults.');
+            }
+        });
+        
+        document.getElementById('resetAppSettings').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset application settings to defaults?')) {
+                localStorage.removeItem('appTheme');
+                localStorage.removeItem('defaultGasMultiplier');
+                localStorage.removeItem('txConfirmations');
+                // Reload the form
+                loadSettings();
+                showAlert('appSettingsAlert', 'Application settings reset to defaults.');
+            }
+        });
+        
+        document.getElementById('resetSecuritySettings').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset security settings to defaults?')) {
+                localStorage.removeItem('autoLockTimeout');
+                localStorage.removeItem('rememberWallets');
+                localStorage.removeItem('storePrivateKeys');
+                localStorage.removeItem('hasEncryptionPassword');
+                // Reload the form
+                loadSettings();
+                showAlert('securitySettingsAlert', 'Security settings reset to defaults.');
+            }
+        });
+    });
+</script>
+{% endblock %}

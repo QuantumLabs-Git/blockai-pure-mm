@@ -1,0 +1,115 @@
+```html
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BlockAI Pure MM{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ url_for('index') }}">
+                        <img src="{{ url_for('static', filename='img/blockai-logo.png') }}" alt="BlockAI Logo" height="30" class="d-inline-block align-text-top me-2">
+                        <span class="fw-bold">Block<span class="blockai-accent">AI</span> <span class="text-muted">Pure MM</span></span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/' else '' }}" href="{{ url_for('index') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/token_management' else '' }}" href="{{ url_for('token_management') }}">Token Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/wallet_management' else '' }}" href="{{ url_for('wallet_management') }}">Wallet Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/trading' else '' }}" href="{{ url_for('trading') }}">Trading</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/multisender' else '' }}" href="{{ url_for('multisender') }}">Multisender</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/liquidity_management' else '' }}" href="{{ url_for('liquidity_management') }}">Liquidity Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ 'active' if request.path == '/launch' else '' }}" href="{{ url_for('launch') }}">Launch</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex align-items-center">
+                            <select class="form-select me-3" id="chainSelector">
+                                <option value="ethereum">Ethereum</option>
+                                <option value="solana" selected>Solana</option>
+                                <option value="bsc">BSC</option>
+                                <option value="base">Base</option>
+                                <option value="sui">SUI</option>
+                            </select>
+                            <a href="{{ url_for('settings') }}" class="settings-link" title="Settings">
+                                <i class="bi bi-gear-fill text-light fs-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="mt-4 py-3 text-center bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-md-start">
+                        <img src="{{ url_for('static', filename='img/blockai-logo.png') }}" alt="BlockAI Logo" height="24" class="d-inline-block me-2 mb-2">
+                        <span class="fw-bold">Block<span class="blockai-accent">AI</span> <span class="text-muted">Pure MM</span></span>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-0">&copy; 2025 BlockAI Pure MM. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <small class="text-muted">Powered by BlockAI Technology</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved blockchain selection from localStorage or default to 'solana'
+            const savedBlockchain = localStorage.getItem('selectedBlockchain') || 'solana';
+            document.getElementById('chainSelector').value = savedBlockchain;
+            
+            // Update localStorage when blockchain is changed
+            document.getElementById('chainSelector').addEventListener('change', function() {
+                const selectedBlockchain = this.value;
+                localStorage.setItem('selectedBlockchain', selectedBlockchain);
+                
+                // Dispatch an event so other pages can react to the blockchain change
+                const event = new CustomEvent('blockchainChanged', { detail: selectedBlockchain });
+                document.dispatchEvent(event);
+            });
+            
+            // Dispatch initial blockchain selected event
+            const initialEvent = new CustomEvent('blockchainChanged', { detail: savedBlockchain });
+            document.dispatchEvent(initialEvent);
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+```

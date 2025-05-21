@@ -1,0 +1,415 @@
+/* BlockAI specific styles */
+.blockai-accent {
+    color: #4488ff; /* Blue accent color for "AI" */
+}
+
+/* Improve form elements */
+.form-control:focus, .form-select:focus {
+    border-color: #4488ff;
+    box-shadow: 0 0 0 0.25rem rgba(68, 136, 255, 0.25);
+}
+
+/* Style for blockchain selector */
+#chainSelector {
+    background-color: #343a40;
+    color: white;
+    border-color: #495057;
+}
+
+#chainSelector:focus {
+    border-color: #4488ff;
+}
+
+/* Card styling */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #4488ff;
+    border-color: #3377ee;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #3377ee;
+    border-color: #2266dd;
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Improve the alert boxes */
+.alert {
+    border-radius: 8px;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+    background-color: #212529;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.jumbotron:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+.navbar {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(68, 136, 255, 0.1);
+}
+
+.nav-link.active {
+    background-color: rgba(68, 136, 255, 0.2);
+    color: #4488ff !important;
+}
+
+/* Home page card hover effects */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer styling */
+footer {
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+/* Toast notifications */
+#toast-container {
+    z-index: 1050;
+}
+
+.toast {
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Form validation styling */
+.was-validated .form-control:valid, .form-control.is-valid {
+    border-color: #198754;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Loading spinner colors */
+.spinner-border.text-primary {
+    color: #4488ff !important;
+}
+
+/* Wallet display tables */
+.table-wallets th {
+    background-color: #343a40;
+    color: white;
+    border-color: #495057;
+}
+
+.table-wallets {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.wallet-address {
+    font-family: monospace;
+    background-color: rgba(68, 136, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    display: inline-block;
+}
+
+/* Copy button styling */
+.btn-copy {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+/* Custom file input styling */
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Select file';
+    display: inline-block;
+    background: #4488ff;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 12px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.custom-file-input:hover::before {
+    background-color: #3377ee;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .jumbotron {
+        text-align: center;
+    }
+    
+    .navbar-brand {
+        margin-left: 0;
+    }
+    
+    .wallet-address {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .wallet-address {
+        max-width: 120px;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Dark mode tweaks */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: #2a2a2a;
+        color: #f8f9fa;
+    }
+    
+    .form-control, .form-select {
+        background-color: #333;
+        color: #f8f9fa;
+        border-color: #444;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background-color: #333;
+        color: #f8f9fa;
+    }
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loading-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Blockchain-specific color accents */
+.ethereum-accent {
+    color: #627EEA; /* Ethereum blue */
+}
+
+.bsc-accent {
+    color: #F3BA2F; /* BSC yellow */
+}
+
+.solana-accent {
+    color: #00FFA3; /* Solana green */
+}
+
+.base-accent {
+    color: #0052FF; /* Base blue */
+}
+
+.sui-accent {
+    color: #6DCEF5; /* SUI light blue */
+}
+
+/* Blockchain-specific button and header styles */
+.btn-ethereum, .bg-ethereum {
+    background-color: #627EEA !important;
+    border-color: #5670da !important;
+    color: white !important;
+}
+
+.btn-bsc, .bg-bsc {
+    background-color: #F3BA2F !important;
+    border-color: #e3aa1f !important;
+    color: #212529 !important;
+}
+
+.btn-base, .bg-base {
+    background-color: #0052FF !important;
+    border-color: #0047e0 !important;
+    color: white !important;
+}
+
+.btn-solana, .bg-solana {
+    background-color: #00FFA3 !important;
+    border-color: #00e093 !important;
+    color: #212529 !important;
+}
+
+.btn-sui, .bg-sui {
+    background-color: #6DCEF5 !important;
+    border-color: #5dbed5 !important;
+    color: #212529 !important;
+}
+
+/* Blockchain badge styles */
+.badge-ethereum {
+    background-color: #627EEA;
+    color: white;
+}
+
+.badge-bsc {
+    background-color: #F3BA2F;
+    color: #212529;
+}
+
+.badge-base {
+    background-color: #0052FF;
+    color: white;
+}
+
+.badge-solana {
+    background-color: #00FFA3;
+    color: #212529;
+}
+
+.badge-sui {
+    background-color: #6DCEF5;
+    color: #212529;
+}
+
+/* Settings icon styling */
+.settings-link {
+    display: inline-block;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.settings-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+}
+
+.settings-link i {
+    display: block;
+}
+
+/* Settings page-specific styles */
+#blockchainTabs .nav-link {
+    color: #495057;
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    border: 1px solid transparent;
+}
+
+#blockchainTabs .nav-link.active {
+    color: #4488ff !important;
+    background-color: transparent;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+#blockchainTabs .nav-link:hover:not(.active) {
+    border-color: transparent;
+    background-color: rgba(68, 136, 255, 0.05);
+}
+
+/* Blockchain-specific tab styling */
+#ethereum-tab.active {
+    color: #627EEA !important;
+    border-bottom-color: #627EEA !important;
+}
+
+#bsc-tab.active {
+    color: #F3BA2F !important;
+    border-bottom-color: #F3BA2F !important;
+}
+
+#base-tab.active {
+    color: #0052FF !important;
+    border-bottom-color: #0052FF !important;
+}
+
+#solana-tab.active {
+    color: #00FFA3 !important;
+    border-bottom-color: #00FFA3 !important;
+}
+
+#sui-tab.active {
+    color: #6DCEF5 !important;
+    border-bottom-color: #6DCEF5 !important;
+}
+
+/* Password field icon for showing/hiding */
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.password-toggle:hover {
+    color: #495057;
+}
+
+/* Form group with position relative for password fields */
+.password-field-container {
+    position: relative;
+}

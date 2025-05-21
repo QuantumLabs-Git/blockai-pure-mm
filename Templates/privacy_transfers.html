@@ -1,0 +1,711 @@
+<!-- templates/privacy_transfers.html -->
+{% extends "base.html" %}
+
+{% block title %}Privacy Transfers - BlockAI Pure MM{% endblock %}
+
+{% block extra_css %}
+<style>
+    .transaction-log {
+        max-height: 400px;
+        overflow-y: auto;
+        background-color: #1a1a1a;
+        color: #f8f8f8;
+        font-family: monospace;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    
+    .log-entry {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #333;
+    }
+    
+    .log-success {
+        color: #00db87;
+    }
+    
+    .log-error {
+        color: #ff4d4d;
+    }
+    
+    .log-info {
+        color: #4da6ff;
+    }
+    
+    .log-warning {
+        color: #ffcc00;
+    }
+    
+    .copy-btn {
+        cursor: pointer;
+    }
+    
+    .tx-link {
+        word-break: break-all;
+    }
+    
+    .tab-content {
+        padding-top: 20px;
+    }
+    
+    .blockchain-selector {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-3">Privacy Transfers</h1>
+    <p class="lead">Send tokens with enhanced privacy through HoudiniSwap integration.</p>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Transfer Configuration</h5>
+        </div>
+        <div class="card-body">
+            <form id="privacyTransferForm">
+                <!-- API Settings -->
+                <div class="mb-4">
+                    <h5>API Settings</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="apiUrl" class="form-label">HoudiniSwap API URL</label>
+                            <input type="url" class="form-control" id="apiUrl" value="https://api-partner.houdiniswap.com/exchange" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="statusApiUrl" class="form-label">Status API URL</label>
+                            <input type="url" class="form-control" id="statusApiUrl" value="https://api-partner.houdiniswap.com/status" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apiKey" class="form-label">API Key</label>
+                            <input type="text" class="form-control" id="apiKey" value="6751a0c41c167e208a2dae44" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="secretKey" class="form-label">Secret Key</label>
+                            <input type="password" class="form-control" id="secretKey" value="wrU6SbJMPVbFYjTCPwyQZV" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rpcUrl" class="form-label">RPC URL</label>
+                            <input type="url" class="form-control" id="rpcUrl" value="https://mainnet.helius-rpc.com/?api-key=7e5bbc4c-02f5-46ca-b781-468b275b5758" required>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch mt-4">
+                                <input class="form-check-input" type="checkbox" id="anonymousSwitch">
+                                <label class="form-check-label" for="anonymousSwitch">Anonymous Mode</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Token Configuration -->
+                <div class="mb-4">
+                    <h5>Token Configuration</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="sendingBlockchain" class="form-label">Sending Blockchain</label>
+                            <select class="form-select blockchain-selector" id="sendingBlockchain">
+                                <option value="SOL">Solana (SOL)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="BSC">Binance Smart Chain (BNB)</option>
+                                <option value="BASE">Base (ETH)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sendingToken" class="form-label">Sending Token</label>
+                            <select class="form-select" id="sendingToken">
+                                <option value="SOL">SOL</option>
+                                <option value="USDC">USDC</option>
+                                <option value="USDT">USDT</option>
+                                <option value="ETH">ETH</option>
+                                <option value="BNB">BNB</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="receivingBlockchain" class="form-label">Receiving Blockchain</label>
+                            <select class="form-select blockchain-selector" id="receivingBlockchain">
+                                <option value="SOL">Solana (SOL)</option>
+                                <option value="ETH">Ethereum (ETH)</option>
+                                <option value="BSC">Binance Smart Chain (BNB)</option>
+                                <option value="BASE">Base (ETH)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="receivingToken" class="form-label">Receiving Token</label>
+                            <select class="form-select" id="receivingToken">
+                                <option value="SOL">SOL</option>
+                                <option value="USDC">USDC</option>
+                                <option value="USDT">USDT</option>
+                                <option value="ETH">ETH</option>
+                                <option value="BNB">BNB</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transfer Method -->
+                <div class="mb-4">
+                    <h5>Transfer Method</h5>
+                    <ul class="nav nav-tabs" id="transferMethodTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="csv-tab" data-bs-toggle="tab" data-bs-target="#csv-content" type="button" role="tab" aria-controls="csv-content" aria-selected="true">CSV Upload</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manual-content" type="button" role="tab" aria-controls="manual-content" aria-selected="false">Manual Entry</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="transferMethodTabsContent">
+                        <!-- CSV Upload Tab -->
+                        <div class="tab-pane fade show active" id="csv-content" role="tabpanel" aria-labelledby="csv-tab">
+                            <div class="mb-3">
+                                <label for="csvFile" class="form-label">Upload CSV File</label>
+                                <input type="file" class="form-control" id="csvFile" accept=".csv">
+                                <div class="form-text">CSV should have columns: 'wallet_address' and 'amount'.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="csvPrivateKey" class="form-label">Sender Private Key</label>
+                                <input type="password" class="form-control" id="csvPrivateKey" placeholder="Enter private key of sending wallet">
+                                <div class="form-text">This is stored locally and never sent to our servers.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label>Preview of CSV Data</label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered" id="csvPreview">
+                                        <thead>
+                                            <tr>
+                                                <th>Wallet Address</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" class="text-center">Upload a CSV file to see preview</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Manual Entry Tab -->
+                        <div class="tab-pane fade" id="manual-content" role="tabpanel" aria-labelledby="manual-tab">
+                            <div class="mb-3">
+                                <label for="senderPrivateKey" class="form-label">Sender Private Key</label>
+                                <input type="password" class="form-control" id="senderPrivateKey" placeholder="Enter private key of sending wallet">
+                                <div class="form-text">This is stored locally and never sent to our servers.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="recipientAddresses" class="form-label">Recipient Addresses and Amounts</label>
+                                <textarea class="form-control" id="recipientAddresses" rows="5" placeholder="Enter one address and amount per line in format: ADDRESS,AMOUNT&#10;Example:&#10;GZtHAe7TehYrLbQxPTs56RP9FD5zJLRqxj4BtFUYwvHc,0.1&#10;9mUVrtwytCR1HKmxYA6RfBG9mHwkHEZ6kf7YF2aRYJWp,0.2"></textarea>
+                                <div class="form-text">Enter one wallet address and amount per line, separated by a comma.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="button" id="startTransfersBtn" class="btn btn-primary btn-lg">Start Transfers</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Transaction Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Privacy Transfers</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h6>Transfer Summary</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Total Recipients</th>
+                                        <td id="totalRecipients">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Amount</th>
+                                        <td id="totalAmount">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th>From Blockchain</th>
+                                        <td id="summaryFromBlockchain">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>To Blockchain</th>
+                                        <td id="summaryToBlockchain">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>From Token</th>
+                                        <td id="summaryFromToken">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>To Token</th>
+                                        <td id="summaryToToken">-</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Anonymous Mode</th>
+                                        <td id="summaryAnonymous">Off</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <strong>Important:</strong> This action cannot be undone. Please verify all details before proceeding.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmTransfersBtn">Confirm Transfers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Transaction Log -->
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Transaction Log</h5>
+        </div>
+        <div class="card-body">
+            <div class="transaction-log" id="transactionLog">
+                <div class="log-entry log-info">Privacy Transfers ready. Configure your transfer settings and click "Start Transfers" to begin.</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize blockchain selectors based on selected chain in navbar
+        const selectedBlockchain = document.getElementById('chainSelector').value;
+        setDefaultBlockchain(selectedBlockchain);
+        
+        // Set up event listeners
+        document.getElementById('chainSelector').addEventListener('change', function() {
+            setDefaultBlockchain(this.value);
+        });
+        
+        // CSV file upload handling
+        document.getElementById('csvFile').addEventListener('change', handleCsvFileUpload);
+        
+        // Start transfers button
+        document.getElementById('startTransfersBtn').addEventListener('click', showConfirmationModal);
+        
+        // Confirm transfers button
+        document.getElementById('confirmTransfersBtn').addEventListener('click', startPrivacyTransfers);
+    });
+    
+    // Maps blockchain selection in the dropdown to values in the form
+    function setDefaultBlockchain(blockchain) {
+        const sendingBlockchain = document.getElementById('sendingBlockchain');
+        const receivingBlockchain = document.getElementById('receivingBlockchain');
+        const sendingToken = document.getElementById('sendingToken');
+        const receivingToken = document.getElementById('receivingToken');
+        
+        // Map the blockchain selector value to the form values
+        let chainValue, tokenValue;
+        
+        switch (blockchain) {
+            case 'ethereum':
+                chainValue = 'ETH';
+                tokenValue = 'ETH';
+                break;
+            case 'bsc':
+                chainValue = 'BSC';
+                tokenValue = 'BNB';
+                break;
+            case 'base':
+                chainValue = 'BASE';
+                tokenValue = 'ETH';
+                break;
+            case 'solana':
+                chainValue = 'SOL';
+                tokenValue = 'SOL';
+                break;
+            case 'sui':
+                chainValue = 'SUI';
+                tokenValue = 'SUI';
+                break;
+            default:
+                chainValue = 'SOL';
+                tokenValue = 'SOL';
+        }
+        
+        // Set the values in the form
+        if (sendingBlockchain.value !== chainValue) {
+            sendingBlockchain.value = chainValue;
+            sendingToken.value = tokenValue;
+        }
+        
+        if (receivingBlockchain.value !== chainValue) {
+            receivingBlockchain.value = chainValue;
+            receivingToken.value = tokenValue;
+        }
+    }
+    
+    // Handle CSV file upload
+    function handleCsvFileUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        // Check if file is a CSV
+        if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+            addLogEntry('Invalid file type. Please upload a CSV file.', 'error');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const contents = e.target.result;
+            const lines = contents.split('\n');
+            
+            // Check if file has header
+            if (lines.length < 2) {
+                addLogEntry('CSV file is empty or invalid.', 'error');
+                return;
+            }
+            
+            // Parse header
+            const header = lines[0].split(',');
+            const walletAddressIndex = header.findIndex(col => 
+                col.trim().toLowerCase() === 'wallet_address' || 
+                col.trim().toLowerCase() === 'address' ||
+                col.trim().toLowerCase() === 'recipient'
+            );
+            
+            const amountIndex = header.findIndex(col => 
+                col.trim().toLowerCase() === 'amount' || 
+                col.trim().toLowerCase() === 'value'
+            );
+            
+            if (walletAddressIndex === -1 || amountIndex === -1) {
+                addLogEntry('CSV file must have columns for wallet_address and amount.', 'error');
+                return;
+            }
+            
+            // Parse data and update preview
+            const previewTable = document.getElementById('csvPreview');
+            const tbody = previewTable.querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            let totalAmount = 0;
+            const recipients = [];
+            
+            for (let i = 1; i < lines.length && i < 6; i++) {
+                if (!lines[i].trim()) continue;
+                
+                const columns = lines[i].split(',');
+                if (columns.length <= Math.max(walletAddressIndex, amountIndex)) continue;
+                
+                const walletAddress = columns[walletAddressIndex].trim();
+                const amount = parseFloat(columns[amountIndex].trim());
+                
+                if (!walletAddress || isNaN(amount)) continue;
+                
+                recipients.push({ walletAddress, amount });
+                totalAmount += amount;
+                
+                const row = document.createElement('tr');
+                const addressCell = document.createElement('td');
+                addressCell.textContent = walletAddress;
+                const amountCell = document.createElement('td');
+                amountCell.textContent = amount;
+                
+                row.appendChild(addressCell);
+                row.appendChild(amountCell);
+                tbody.appendChild(row);
+            }
+            
+            // Add a summary row if there are more recipients
+            if (lines.length > 6) {
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 2;
+                cell.textContent = `... and ${lines.length - 6} more recipients`;
+                cell.className = 'text-center';
+                row.appendChild(cell);
+                tbody.appendChild(row);
+            }
+            
+            addLogEntry(`CSV file loaded with ${recipients.length} recipients and a total amount of ${totalAmount}.`, 'info');
+        };
+        
+        reader.onerror = function() {
+            addLogEntry('Error reading CSV file.', 'error');
+        };
+        
+        reader.readAsText(file);
+    }
+    
+    // Show confirmation modal
+    function showConfirmationModal() {
+        // Get transfer method
+        const isUsingCsv = document.getElementById('csv-tab').classList.contains('active');
+        
+        // Get values from form
+        const sendingBlockchain = document.getElementById('sendingBlockchain').value;
+        const receivingBlockchain = document.getElementById('receivingBlockchain').value;
+        const sendingToken = document.getElementById('sendingToken').value;
+        const receivingToken = document.getElementById('receivingToken').value;
+        const anonymous = document.getElementById('anonymousSwitch').checked;
+        
+        // Get recipients and validate private key
+        let recipients = [];
+        let privateKey = '';
+        
+        if (isUsingCsv) {
+            const csvFile = document.getElementById('csvFile');
+            privateKey = document.getElementById('csvPrivateKey').value;
+            
+            if (!csvFile.files.length) {
+                addLogEntry('Please upload a CSV file.', 'error');
+                return;
+            }
+            
+            // We already parsed the CSV, so just count the rows
+            const previewTable = document.getElementById('csvPreview');
+            const rows = previewTable.querySelectorAll('tbody tr');
+            const totalRecipients = rows.length;
+            
+            // Calculate total amount
+            let totalAmount = 0;
+            for (const row of rows) {
+                const amountCell = row.querySelector('td:nth-child(2)');
+                if (amountCell && !isNaN(parseFloat(amountCell.textContent))) {
+                    totalAmount += parseFloat(amountCell.textContent);
+                }
+            }
+            
+            // Update modal
+            document.getElementById('totalRecipients').textContent = totalRecipients;
+            document.getElementById('totalAmount').textContent = `${totalAmount} ${sendingToken}`;
+        } else {
+            privateKey = document.getElementById('senderPrivateKey').value;
+            const recipientText = document.getElementById('recipientAddresses').value;
+            
+            if (!recipientText.trim()) {
+                addLogEntry('Please enter recipient addresses and amounts.', 'error');
+                return;
+            }
+            
+            // Parse recipients
+            const lines = recipientText.trim().split('\n');
+            let totalAmount = 0;
+            
+            for (const line of lines) {
+                if (!line.trim()) continue;
+                
+                const parts = line.split(',');
+                if (parts.length !== 2) {
+                    addLogEntry(`Invalid format in line: ${line}. Expected format: ADDRESS,AMOUNT`, 'error');
+                    continue;
+                }
+                
+                const walletAddress = parts[0].trim();
+                const amount = parseFloat(parts[1].trim());
+                
+                if (isNaN(amount)) {
+                    addLogEntry(`Invalid amount in line: ${line}`, 'error');
+                    continue;
+                }
+                
+                recipients.push({ walletAddress, amount });
+                totalAmount += amount;
+            }
+            
+            if (recipients.length === 0) {
+                addLogEntry('No valid recipients found.', 'error');
+                return;
+            }
+            
+            // Update modal
+            document.getElementById('totalRecipients').textContent = recipients.length;
+            document.getElementById('totalAmount').textContent = `${totalAmount.toFixed(8)} ${sendingToken}`;
+        }
+        
+        // Validate private key
+        if (!privateKey) {
+            addLogEntry('Please enter a private key for the sending wallet.', 'error');
+            return;
+        }
+        
+        // Update other modal fields
+        document.getElementById('summaryFromBlockchain').textContent = sendingBlockchain;
+        document.getElementById('summaryToBlockchain').textContent = receivingBlockchain;
+        document.getElementById('summaryFromToken').textContent = sendingToken;
+        document.getElementById('summaryToToken').textContent = receivingToken;
+        document.getElementById('summaryAnonymous').textContent = anonymous ? 'On' : 'Off';
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        modal.show();
+    }
+    
+    // Start the privacy transfers
+    function startPrivacyTransfers() {
+        // Hide the confirmation modal
+        bootstrap.Modal.getInstance(document.getElementById('confirmationModal')).hide();
+        
+        // Get transfer method
+        const isUsingCsv = document.getElementById('csv-tab').classList.contains('active');
+        
+        // Get values from form
+        const apiUrl = document.getElementById('apiUrl').value;
+        const statusApiUrl = document.getElementById('statusApiUrl').value;
+        const apiKey = document.getElementById('apiKey').value;
+        const secretKey = document.getElementById('secretKey').value;
+        const rpcUrl = document.getElementById('rpcUrl').value;
+        const sendingBlockchain = document.getElementById('sendingBlockchain').value;
+        const receivingBlockchain = document.getElementById('receivingBlockchain').value;
+        const sendingToken = document.getElementById('sendingToken').value;
+        const receivingToken = document.getElementById('receivingToken').value;
+        const anonymous = document.getElementById('anonymousSwitch').checked;
+        
+        // Get private key and recipients
+        let privateKey, recipients;
+        
+        if (isUsingCsv) {
+            privateKey = document.getElementById('csvPrivateKey').value;
+            // We would parse the CSV file here in a real implementation
+            addLogEntry('Processing CSV file...', 'info');
+            
+            // Simulate some recipients for demo
+            recipients = [
+                { walletAddress: 'GZtHAe7TehYrLbQxPTs56RP9FD5zJLRqxj4BtFUYwvHc', amount: 0.1 },
+                { walletAddress: '9mUVrtwytCR1HKmxYA6RfBG9mHwkHEZ6kf7YF2aRYJWp', amount: 0.2 }
+            ];
+        } else {
+            privateKey = document.getElementById('senderPrivateKey').value;
+            const recipientText = document.getElementById('recipientAddresses').value;
+            
+            // Parse recipients
+            const lines = recipientText.trim().split('\n');
+            recipients = [];
+            
+            for (const line of lines) {
+                if (!line.trim()) continue;
+                
+                const parts = line.split(',');
+                if (parts.length !== 2) continue;
+                
+                const walletAddress = parts[0].trim();
+                const amount = parseFloat(parts[1].trim());
+                
+                if (isNaN(amount)) continue;
+                
+                recipients.push({ walletAddress, amount });
+            }
+        }
+        
+        // Log start of transfers
+        addLogEntry(`Starting privacy transfers for ${recipients.length} recipients.`, 'info');
+        
+        // Simulate the transfer process
+        simulatePrivacyTransfers(recipients, {
+            apiUrl, statusApiUrl, apiKey, secretKey, rpcUrl,
+            sendingBlockchain, receivingBlockchain, sendingToken, receivingToken,
+            anonymous, privateKey
+        });
+    }
+    
+    // Simulate the privacy transfer process
+    function simulatePrivacyTransfers(recipients, config) {
+        let currentIndex = 0;
+        
+        function processNextRecipient() {
+            if (currentIndex >= recipients.length) {
+                addLogEntry('All transfers completed!', 'success');
+                return;
+            }
+            
+            const recipient = recipients[currentIndex];
+            currentIndex++;
+            
+            // Simulate creating a HoudiniSwap order
+            addLogEntry(`Creating order for ${recipient.walletAddress} (${recipient.amount} ${config.sendingToken})...`, 'info');
+            
+            setTimeout(() => {
+                // Generate a random order ID
+                const orderId = 'HS-' + Math.floor(Math.random() * 10000000).toString().padStart(7, '0');
+                const sendingWallet = 'HOU' + Math.random().toString(36).substring(2, 12) + Math.random().toString(36).substring(2, 12);
+                
+                addLogEntry(`✅ Order Created: ${orderId}`, 'success');
+                addLogEntry(`🔹 Sending Wallet: ${sendingWallet}`, 'info');
+                addLogEntry(`🔹 Amount to Send: ${recipient.amount} ${config.sendingToken}`, 'info');
+                
+                // Simulate sending transaction
+                setTimeout(() => {
+                    addLogEntry(`💸 Sending ${recipient.amount} ${config.sendingToken} to ${sendingWallet}...`, 'info');
+                    
+                    // Simulate transaction confirmation
+                    setTimeout(() => {
+                        // Generate a random transaction signature
+                        const signature = '5' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                        
+                        addLogEntry(`✅ Transaction successful! Signature: ${signature}`, 'success');
+                        
+                        // Simulate checking order status
+                        setTimeout(() => {
+                            addLogEntry(`🔍 Checking order status for ${orderId}...`, 'info');
+                            
+                            // Simulate status response
+                            setTimeout(() => {
+                                const status = Math.random() > 0.2 ? 'COMPLETED' : 'PROCESSING';
+                                addLogEntry(`📊 Order Status: ${status}`, status === 'COMPLETED' ? 'success' : 'warning');
+                                
+                                if (status === 'COMPLETED') {
+                                    addLogEntry(`✅ Transfer to ${recipient.walletAddress} completed successfully`, 'success');
+                                } else {
+                                    addLogEntry(`⏳ Transfer to ${recipient.walletAddress} is being processed`, 'warning');
+                                }
+                                
+                                // Process next recipient
+                                setTimeout(processNextRecipient, 1000);
+                            }, 1000);
+                        }, 1000);
+                    }, 2000);
+                }, 1000);
+            }, 1000);
+        }
+        
+        // Start processing recipients
+        processNextRecipient();
+    }
+    
+    // Add entry to transaction log
+    function addLogEntry(message, type = 'info') {
+        const log = document.getElementById('transactionLog');
+        const entry = document.createElement('div');
+        entry.className = `log-entry log-${type}`;
+        
+        // Add timestamp
+        const now = new Date();
+        const timestamp = `[${now.toLocaleTimeString()}] `;
+        
+        // Construct message with timestamp
+        entry.textContent = timestamp + message;
+        
+        // Add to log
+        log.appendChild(entry);
+        
+        // Scroll to bottom
+        log.scrollTop = log.scrollHeight;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+# Fixing Multiple Instance Issue - Rebuild Instructions
+
+The problem you experienced (multiple instances opening) is a common issue with packaged Flask applications. The improved launcher script prevents this by:
+
+1. Creating a lock file to ensure only one instance runs
+2. Checking if the port is already in use
+3. Opening a browser to the existing instance if one is already running
+4. Adding more detailed logging for troubleshooting
+
+## Steps to Rebuild the Application
+
+### 1. Save the improved launcher script
+
+Save the provided `improved_launcher.py` file to your project directory.
+
+### 2. Update your spec file
+
+Either:
+
+a) Save the updated spec file as `blockai.spec`
+
+OR 
+
+b) Modify your existing spec file to:
+   - Change the main script from `app.py` to `improved_launcher.py`
+   - Add 'socket' and 'atexit' to hiddenimports
+   - Change console to True (temporarily for debugging)
+
+### 3. Rebuild the application
+
+```bash
+pyinstaller blockai.spec
+```
+
+### 4. Test the application
+
+1. Open the built application from the `dist` folder
+2. It should open one instance with one browser window
+3. If you try to open the app again, it should detect the running instance and just open another browser tab
+
+### 5. Troubleshooting
+
+If you still have issues:
+
+1. Look in the console window for error messages
+2. Check if a lock file is created in your home directory (`~/blockai_app.lock`)
+3. Make sure the generated app has permission to write to your home directory
+
+### 6. Final Polishing (Once Working)
+
+Once everything is working correctly:
+
+1. If you want to hide the console window, change `console=True` back to `console=False` in the spec file
+2. Rebuild with `pyinstaller blockai.spec`
+
+## Key Improvements Made
+
+1. **Single Instance Check**: Uses a lock file to prevent multiple instances
+2. **Port Checking**: Verifies if the Flask port is already in use
+3. **Improved Error Handling**: Added better error messages and exception handling
+4. **Working Directory Management**: Ensures correct file paths
+5. **Clean Exit Handling**: Removes lock file on application exit
+
+This approach should resolve the multiple instance issue while keeping all your application functionality intact.

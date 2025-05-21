@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; fill: white; font-size: 120px; }
+    .logo-text-ai { font-family: Arial, sans-serif; font-weight: bold; fill: white; font-size: 80px; }
+    .pixel { fill: white; }
+  </style>
+  
+  <!-- Text "Block" -->
+  <text x="50" y="110" class="logo-text">Block</text>
+  
+  <!-- Text "AI" -->
+  <text x="360" y="110" class="logo-text-ai">AI</text>
+  
+  <!-- Pixels -->
+  <rect x="50" y="30" width="20" height="20" class="pixel" />
+  <rect x="80" y="30" width="20" height="20" class="pixel" />
+  <rect x="110" y="30" width="20" height="20" class="pixel" />
+  
+  <rect x="170" y="60" width="20" height="20" class="pixel" />
+  <rect x="200" y="60" width="20" height="20" class="pixel" />
+  
+  <rect x="290" y="80" width="20" height="20" class="pixel" />
+  <rect x="320" y="40" width="20" height="20" class="pixel" />
+  
+  <rect x="410" y="50" width="20" height="20" class="pixel" />
+  <rect x="440" y="80" width="20" height="20" class="pixel" />
+</svg>

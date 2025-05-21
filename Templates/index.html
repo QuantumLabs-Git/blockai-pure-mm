@@ -1,0 +1,84 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}Home - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="jumbotron mb-4 p-4 bg-dark text-white rounded shadow-lg">
+    <div class="row align-items-center">
+        <div class="col-md-3 text-center">
+            <img src="{{ url_for('static', filename='img/blockai-logo-large.png') }}" alt="BlockAI Logo" class="img-fluid mb-3" style="max-width: 200px;">
+        </div>
+        <div class="col-md-9">
+            <h1 class="display-4 fw-bold">Block<span class="blockai-accent">AI</span> <span class="text-muted">Pure MM</span></h1>
+            <p class="lead">Advanced blockchain market making and management platform</p>
+            <div class="d-flex mt-3">
+                <div class="badge bg-dark text-white border border-secondary p-2 me-2">AI-Powered</div>
+                <div class="badge bg-dark text-white border border-secondary p-2 me-2">Multi-Chain</div>
+                <div class="badge bg-dark text-white border border-secondary p-2 me-2">Secure</div>
+                <div class="badge bg-dark text-white border border-secondary p-2">Optimized</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Token Management</h5>
+                <p class="card-text">Create, manage, and analyze your tokens.</p>
+                <a href="{{ url_for('token_management') }}" class="btn btn-primary">Go to Token Management</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Wallet Management</h5>
+                <p class="card-text">Secure and manage your crypto wallets.</p>
+                <a href="{{ url_for('wallet_management') }}" class="btn btn-primary">Go to Wallet Management</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Trading</h5>
+                <p class="card-text">Execute trades and manage your positions.</p>
+                <a href="{{ url_for('trading') }}" class="btn btn-primary">Go to Trading</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Multisender</h5>
+                <p class="card-text">Send tokens to multiple addresses in one transaction.</p>
+                <a href="{{ url_for('multisender') }}" class="btn btn-primary">Go to Multisender</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Liquidity Management</h5>
+                <p class="card-text">Add, remove, and manage liquidity pools.</p>
+                <a href="{{ url_for('liquidity_management') }}" class="btn btn-primary">Go to Liquidity Management</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Launch</h5>
+                <p class="card-text">Launch new tokens and manage token launches.</p>
+                <a href="{{ url_for('launch') }}" class="btn btn-primary">Go to Launch</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

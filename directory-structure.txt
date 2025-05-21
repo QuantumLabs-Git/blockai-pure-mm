@@ -1,0 +1,52 @@
+blockai-pure-mm/
+├── app.py                      # Updated with robust error handling
+├── improved_launcher.py        # New launcher with lock file mechanism
+├── requirements.txt
+├── README.md
+├── cairo_patch.py
+├── generate_logos.py
+├── generate_logos_patched.py
+├── solana_wallet_generator.py  # New dedicated wallet generator
+├── houdini.js
+├── mexc-implementation-summary.md
+├── blockai.spec                # Updated PyInstaller spec file
+├── single_arch_blockai.spec    # Alternative spec for single-architecture builds
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   ├── img/
+│   │   ├── blockai-logo.png
+│   │   └── blockai-logo-large.png
+│   ├── downloads/
+│   │   └── # Generated wallet files will be stored here
+│   └── instance_states/        # New directory for instance state files
+│       └── features/           # New subdirectory for feature state files
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── token_management.html
+│   ├── wallet_management.html
+│   ├── wallet_warmup.html
+│   ├── trading.html
+│   ├── cex_mm.html            # CEX market making page
+│   ├── dex_mm.html            # DEX market making page 
+│   ├── mexc.html              # MEXC market making page
+│   ├── multisender.html
+│   ├── privacy_transfers.html
+│   ├── liquidity_management.html
+│   ├── launch.html
+│   └── settings.html
+├── modules/
+│   ├── __init__.py
+│   ├── token_manager.py
+│   ├── wallet_manager.py
+│   ├── trader.py
+│   ├── multisender.py
+│   ├── liquidity_manager.py
+│   └── launcher.py
+├── hook-app.py                # PyInstaller hook for proper packaging
+└── logs/                      # New directory for log files
+    ├── app.log                # General application logs
+    └── wallet_generation.log  # Specific logs for wallet generation

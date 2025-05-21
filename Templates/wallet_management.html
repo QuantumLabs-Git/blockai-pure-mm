@@ -1,0 +1,275 @@
+```html
+<!-- templates/wallet_management.html -->
+{% extends "base.html" %}
+
+{% block title %}Wallet Management - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Wallet Management</h1>
+    
+    <!-- Wallet Generator (Ethereum, BSC, Base, Solana) -->
+    <div class="card mb-4" id="walletGenerator" style="display: none;">
+        <div class="card-header" id="walletGeneratorHeader">
+            <h5 class="mb-0" id="walletGeneratorTitle">Generate Wallets</h5>
+        </div>
+        <div class="card-body">
+            <form id="generateWalletsForm" action="{{ url_for('generate_wallets') }}" method="post">
+                <input type="hidden" id="blockchainInput" name="blockchain" value="ethereum">
+                
+                <div class="mb-3">
+                    <label for="walletCount" class="form-label">Number of Wallets to Generate</label>
+                    <input type="number" class="form-control" id="walletCount" name="walletCount" min="1" max="1000" value="10">
+                    <div class="form-text">Generate between 1 and 1000 wallets</div>
+                </div>
+                <div class="mb-3">
+                    <label for="fileName" class="form-label">File Name</label>
+                    <input type="text" class="form-control" id="fileName" name="fileName" placeholder="wallets.xlsx">
+                    <div class="form-text">File will be saved in the 'downloads' folder</div>
+                </div>
+                <div id="walletInfoBox" class="alert alert-secondary mb-3" style="display: none;">
+                    <!-- Blockchain-specific information will appear here -->
+                </div>
+                <button type="submit" class="btn btn-primary" id="generateButton">Generate Wallets</button>
+            </form>
+            
+            <div id="generationResult" class="mt-3" style="display: none;">
+                <div class="alert alert-success">
+                    <span id="resultMessage"></span>
+                    <a id="downloadLink" href="#" class="btn btn-sm btn-success ms-2">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Solana Wallet WarmUp Card -->
+    <div class="card mb-4" id="solanaWarmupCard" style="display: none;">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Solana Wallet WarmUp</h5>
+        </div>
+        <div class="card-body">
+            <p>Warm up multiple Solana wallets with token transactions to prepare them for active use.</p>
+            <div class="mb-3">
+                <ul>
+                    <li>Upload a CSV file with wallet private keys or enter them manually</li>
+                    <li>Select up to 10 token addresses to use for warmup transactions</li>
+                    <li>Run parallel instances to warm up different sets of wallets simultaneously</li>
+                    <li>Monitor transaction status in real-time</li>
+                </ul>
+            </div>
+            <a href="{{ url_for('wallet_warmup') }}" class="btn btn-success">
+                <i class="bi bi-fire"></i> Go to Wallet WarmUp
+            </a>
+        </div>
+    </div>
+    
+    <!-- Regular Wallet Management Card -->
+    <div class="card">
+        <div class="card-body">
+            <p>This is the wallet management page. You'll be able to create, import, and manage your crypto wallets here.</p>
+            <!-- Wallet management content will go here -->
+            <div class="alert alert-info">
+                General wallet management features will be implemented later.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Function to show or hide the wallet generator based on blockchain selection
+    function updateWalletGeneratorVisibility() {
+        const selectedChain = document.getElementById('chainSelector').value;
+        const walletGenerator = document.getElementById('walletGenerator');
+        const walletGeneratorHeader = document.getElementById('walletGeneratorHeader');
+        const walletGeneratorTitle = document.getElementById('walletGeneratorTitle');
+        const blockchainInput = document.getElementById('blockchainInput');
+        const generateButton = document.getElementById('generateButton');
+        const fileNameInput = document.getElementById('fileName');
+        const walletInfoBox = document.getElementById('walletInfoBox');
+        
+        // Check if the selected blockchain is supported
+        const supportedChains = ['ethereum', 'bsc', 'base', 'solana'];
+        
+        if (supportedChains.includes(selectedChain)) {
+            // Show the wallet generator
+            walletGenerator.style.display = 'block';
+            
+            // Update the hidden input value
+            blockchainInput.value = selectedChain;
+            
+            // Update placeholders and text based on blockchain
+            fileNameInput.placeholder = `${selectedChain}_wallets.xlsx`;
+            
+            // Clear and hide the info box by default
+            walletInfoBox.style.display = 'none';
+            walletInfoBox.innerHTML = '';
+            
+            // Update headers and classes based on the blockchain
+            if (selectedChain === 'ethereum') {
+                walletGeneratorHeader.className = 'card-header bg-primary text-white';
+                walletGeneratorTitle.textContent = 'Generate Ethereum Wallets';
+                generateButton.className = 'btn btn-primary';
+            } else if (selectedChain === 'bsc') {
+                walletGeneratorHeader.className = 'card-header bg-warning text-dark';
+                walletGeneratorTitle.textContent = 'Generate BSC Wallets';
+                generateButton.className = 'btn btn-warning text-dark';
+            } else if (selectedChain === 'base') {
+                walletGeneratorHeader.className = 'card-header bg-info text-white';
+                walletGeneratorTitle.textContent = 'Generate Base Wallets';
+                generateButton.className = 'btn btn-info text-white';
+            } else if (selectedChain === 'solana') {
+                walletGeneratorHeader.className = 'card-header bg-success text-white';
+                walletGeneratorTitle.textContent = 'Generate Solana Wallets';
+                generateButton.className = 'btn btn-success';
+                
+                // Show Solana-specific information
+                walletInfoBox.style.display = 'block';
+                walletInfoBox.innerHTML = `
+                    <h6>Solana Wallet Information</h6>
+                    <p class="mb-1">Solana wallets use Ed25519 elliptic curve cryptography, different from EVM chains.</p>
+                    <p class="mb-0">The generated file will contain public keys (addresses) and private keys in Base58 format.</p>
+                `;
+            }
+        } else {
+            // Hide the wallet generator for unsupported chains
+            walletGenerator.style.display = 'none';
+        }
+    }
+    
+    // Function to update visibility of Solana WarmUp card
+    function updateSolanaWarmupVisibility() {
+        const selectedChain = document.getElementById('chainSelector').value;
+        const solanaWarmupCard = document.getElementById('solanaWarmupCard');
+        
+        // Only show the Solana WarmUp card when Solana is selected
+        if (selectedChain === 'solana') {
+            solanaWarmupCard.style.display = 'block';
+        } else {
+            solanaWarmupCard.style.display = 'none';
+        }
+    }
+    
+    // Add event listener to the chain selector
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initial setup based on saved blockchain
+        const savedBlockchain = localStorage.getItem('selectedBlockchain') || 'solana';
+        
+        // Initialize UI based on the saved blockchain
+        updateWalletGeneratorVisibility();
+        updateSolanaWarmupVisibility();
+        
+        // Listen for blockchain changes from the navbar dropdown
+        document.addEventListener('blockchainChanged', function(event) {
+            updateWalletGeneratorVisibility();
+            updateSolanaWarmupVisibility();
+        });
+        
+        // Handle form submission with AJAX
+        const generateWalletsForm = document.getElementById('generateWalletsForm');
+        generateWalletsForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(generateWalletsForm);
+            
+            // Show loading state
+            const submitButton = generateWalletsForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...';
+            submitButton.disabled = true;
+            
+            // Hide previous results
+            document.getElementById('generationResult').style.display = 'none';
+            
+            fetch(generateWalletsForm.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show result message
+                document.getElementById('resultMessage').textContent = data.message;
+                
+                // Update download link
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = data.download_url;
+                downloadLink.style.display = 'inline-block';
+                
+                // Show result div
+                document.getElementById('generationResult').style.display = 'block';
+                
+                // Reset button
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                // Save as a feature state
+                const featureState = {
+                    type: 'wallet_generation',
+                    blockchain: document.getElementById('blockchainInput').value,
+                    count: document.getElementById('walletCount').value,
+                    fileName: document.getElementById('fileName').value,
+                    result: data,
+                    timestamp: Date.now()
+                };
+                
+                localStorage.setItem('walletGenerationState', JSON.stringify(featureState));
+                
+                // Save to server as well
+                fetch('/api/save_feature_state', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        feature_id: 'wallet_generation',
+                        feature_data: featureState
+                    })
+                }).catch(error => console.error('Error saving feature state:', error));
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('resultMessage').textContent = 'An error occurred while generating wallets.';
+                document.getElementById('generationResult').style.display = 'block';
+                document.getElementById('downloadLink').style.display = 'none';
+                
+                // Reset button
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+            });
+        });
+        
+        // Load feature state if available
+        const savedFeatureState = localStorage.getItem('walletGenerationState');
+        if (savedFeatureState) {
+            try {
+                const featureState = JSON.parse(savedFeatureState);
+                
+                // Only restore if it's recent (less than 1 day old)
+                const isRecent = (Date.now() - featureState.timestamp) < 86400000; // 24 hours
+                
+                if (isRecent) {
+                    // Restore form values
+                    document.getElementById('blockchainInput').value = featureState.blockchain;
+                    document.getElementById('walletCount').value = featureState.count;
+                    document.getElementById('fileName').value = featureState.fileName;
+                    
+                    // Restore result if available
+                    if (featureState.result && featureState.result.success) {
+                        document.getElementById('resultMessage').textContent = featureState.result.message;
+                        
+                        const downloadLink = document.getElementById('downloadLink');
+                        downloadLink.href = featureState.result.download_url;
+                        downloadLink.style.display = 'inline-block';
+                        
+                        document.getElementById('generationResult').style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                console.error('Error parsing saved feature state:', error);
+            }
+        }
+    });
+</script>
+{% endblock %}
+```

@@ -1,0 +1,405 @@
+```html
+<!-- Add this generic template for other feature pages like dex_mm.html, cex_mm.html, etc. -->
+<!-- templates/feature_template.html -->
+{% extends "base.html" %}
+
+{% block title %}Feature Name - BlockAI Pure MM{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Feature-specific styles here */
+    .feature-card {
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .feature-status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .status-active {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .status-inactive {
+        background-color: #dc3545;
+        color: white;
+    }
+    
+    .status-pending {
+        background-color: #ffc107;
+        color: black;
+    }
+    
+    .feature-log {
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: #1a1a1a;
+        color: #f8f8f8;
+        font-family: monospace;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+    
+    .log-entry {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #333;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Feature Name</h1>
+    
+    <!-- Feature Config Card -->
+    <div class="card feature-card mb-4">
+        <div class="card-header bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Configuration</h5>
+                <div>
+                    <span id="featureStatus" class="feature-status status-inactive">Inactive</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form id="featureForm">
+                <!-- Feature-specific form fields go here -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="param1" class="form-label">Parameter 1</label>
+                        <input type="text" class="form-control" id="param1" name="param1">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="param2" class="form-label">Parameter 2</label>
+                        <input type="number" class="form-control" id="param2" name="param2">
+                    </div>
+                </div>
+                
+                <!-- Control Buttons -->
+                <div class="d-grid gap-2">
+                    <button type="button" id="startButton" class="btn btn-primary btn-lg">
+                        <i class="bi bi-play-fill"></i> Start Feature
+                    </button>
+                    <button type="button" id="stopButton" class="btn btn-danger btn-lg" style="display:none;">
+                        <i class="bi bi-stop-fill"></i> Stop Feature
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Feature Log Card -->
+    <div class="card feature-card">
+        <div class="card-header bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Activity Log</h5>
+                <button class="btn btn-sm btn-secondary" id="clearLogBtn">
+                    <i class="bi bi-trash"></i> Clear Log
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="feature-log" id="featureLog">
+                <div class="log-entry">Feature initialized. Configure settings and click "Start Feature" to begin.</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Feature state and variables
+        let featureState = {
+            running: false,
+            config: {},
+            logs: []
+        };
+        
+        const FEATURE_ID = 'feature_name'; // Replace with actual feature ID
+        
+        // DOM elements
+        const featureForm = document.getElementById('featureForm');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const featureStatus = document.getElementById('featureStatus');
+        const featureLog = document.getElementById('featureLog');
+        const clearLogBtn = document.getElementById('clearLogBtn');
+        
+        // Log entry function
+        function addLogEntry(message, type = 'info') {
+            // Create log entry
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            // Add timestamp
+            const now = new Date();
+            const timestamp = `[${now.toLocaleTimeString()}] `;
+            
+            // Set message
+            entry.textContent = timestamp + message;
+            
+            // Add special styling based on type if needed
+            if (type === 'error') {
+                entry.style.color = '#ff4d4d';
+            } else if (type === 'success') {
+                entry.style.color = '#00db87';
+            } else if (type === 'warning') {
+                entry.style.color = '#ffcc00';
+            }
+            
+            // Add to log
+            featureLog.appendChild(entry);
+            
+            // Scroll to bottom
+            featureLog.scrollTop = featureLog.scrollHeight;
+            
+            // Add to state
+            featureState.logs.push({
+                text: entry.textContent,
+                type: type
+            });
+            
+            // Save updated state
+            saveFeatureState();
+        }
+        
+        // Start feature
+        function startFeature() {
+            // Get form data
+            const formData = new FormData(featureForm);
+            const config = {};
+            
+            // Convert form data to object
+            for (let [key, value] of formData.entries()) {
+                // Handle special value types as needed
+                config[key] = value;
+            }
+            
+            // Update state
+            featureState.running = true;
+            featureState.config = config;
+            
+            // Update UI
+            startButton.style.display = 'none';
+            stopButton.style.display = 'block';
+            featureStatus.textContent = 'Active';
+            featureStatus.className = 'feature-status status-active';
+            
+            // Add log entry
+            addLogEntry('Feature started successfully', 'success');
+            
+            // Save state
+            saveFeatureState();
+            
+            // TODO: Add actual API call or function to start the feature
+        }
+        
+        // Stop feature
+        function stopFeature() {
+            // Update state
+            featureState.running = false;
+            
+            // Update UI
+            startButton.style.display = 'block';
+            stopButton.style.display = 'none';
+            featureStatus.textContent = 'Inactive';
+            featureStatus.className = 'feature-status status-inactive';
+            
+            // Add log entry
+            addLogEntry('Feature stopped', 'info');
+            
+            // Save state
+            saveFeatureState();
+            
+            // TODO: Add actual API call or function to stop the feature
+        }
+        
+        // Clear log
+        function clearLog() {
+            // Clear log div
+            featureLog.innerHTML = '';
+            
+            // Add initial message
+            addLogEntry('Log cleared');
+            
+            // Save state
+            saveFeatureState();
+        }
+        
+        // Save feature state
+        function saveFeatureState() {
+            const state = {
+                running: featureState.running,
+                config: featureState.config,
+                logs: featureState.logs.slice(-50), // Only keep last 50 logs
+                timestamp: Date.now(),
+                blockchain: localStorage.getItem('selectedBlockchain') || 'solana'
+            };
+            
+            // Save to localStorage
+            localStorage.setItem(`state-${FEATURE_ID}`, JSON.stringify(state));
+            
+            // Save to server if helper available
+            if (window.appHelpers && window.appHelpers.saveFeatureState) {
+                window.appHelpers.saveFeatureState(FEATURE_ID, state);
+            } else {
+                // Fallback to fetch API
+                fetch('/api/save_feature_state', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        feature_id: FEATURE_ID,
+                        feature_data: state
+                    })
+                }).catch(error => console.error('Error saving feature state:', error));
+            }
+        }
+        
+        // Load feature state
+        function loadFeatureState() {
+            // Try to load from localStorage first
+            const savedState = localStorage.getItem(`state-${FEATURE_ID}`);
+            
+            if (savedState) {
+                try {
+                    const state = JSON.parse(savedState);
+                    restoreFeatureState(state);
+                } catch (error) {
+                    console.error('Error parsing saved state:', error);
+                    addLogEntry('Error loading previous state', 'error');
+                }
+            }
+            
+            // Try to load from server as well
+            if (window.appHelpers && window.appHelpers.loadFeatureState) {
+                window.appHelpers.loadFeatureState(FEATURE_ID)
+                    .then(state => {
+                        if (state) {
+                            restoreFeatureState(state);
+                        }
+                    });
+            } else {
+                // Fallback to fetch API
+                fetch(`/api/load_feature_state/${FEATURE_ID}`)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            restoreFeatureState(result.data);
+                        }
+                    })
+                    .catch(error => console.error('Error loading feature state:', error));
+            }
+        }
+        
+        // Restore feature state
+        function restoreFeatureState(state) {
+            if (!state) return;
+            
+            // Check if state is for the current blockchain
+            const currentBlockchain = localStorage.getItem('selectedBlockchain') || 'solana';
+            if (state.blockchain && state.blockchain !== currentBlockchain) {
+                console.log('Ignoring state from different blockchain:', state.blockchain);
+                return;
+            }
+            
+            // Restore basic state
+            featureState.running = state.running;
+            featureState.config = state.config;
+            
+            // Restore form values
+            if (state.config) {
+                for (const [key, value] of Object.entries(state.config)) {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        if (element.type === 'checkbox') {
+                            element.checked = value;
+                        } else {
+                            element.value = value;
+                        }
+                    }
+                }
+            }
+            
+            // Restore logs
+            if (state.logs && state.logs.length > 0) {
+                featureLog.innerHTML = '';
+                featureState.logs = state.logs;
+                
+                state.logs.forEach(log => {
+                    const entry = document.createElement('div');
+                    entry.className = 'log-entry';
+                    entry.textContent = log.text;
+                    
+                    if (log.type === 'error') {
+                        entry.style.color = '#ff4d4d';
+                    } else if (log.type === 'success') {
+                        entry.style.color = '#00db87';
+                    } else if (log.type === 'warning') {
+                        entry.style.color = '#ffcc00';
+                    }
+                    
+                    featureLog.appendChild(entry);
+                });
+                
+                featureLog.scrollTop = featureLog.scrollHeight;
+            }
+            
+            // Update UI based on running state
+            if (state.running) {
+                startButton.style.display = 'none';
+                stopButton.style.display = 'block';
+                featureStatus.textContent = 'Active';
+                featureStatus.className = 'feature-status status-active';
+            } else {
+                startButton.style.display = 'block';
+                stopButton.style.display = 'none';
+                featureStatus.textContent = 'Inactive';
+                featureStatus.className = 'feature-status status-inactive';
+            }
+        }
+        
+        // Event listeners
+        startButton.addEventListener('click', startFeature);
+        stopButton.addEventListener('click', stopFeature);
+        clearLogBtn.addEventListener('click', clearLog);
+        
+        // Load saved blockchain and update UI accordingly
+        document.addEventListener('blockchainChanged', function(event) {
+            const blockchain = event.detail;
+            console.log('Blockchain changed to:', blockchain);
+            
+            // Reload feature state based on the new blockchain
+            loadFeatureState();
+            
+            // Add log entry about blockchain change
+            addLogEntry(`Blockchain switched to ${blockchain.toUpperCase()}`, 'info');
+        });
+        
+        // Listen for page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && featureState.running) {
+                // User has returned to the page while feature is running
+                loadFeatureState();
+                addLogEntry('Welcome back! Refreshing feature state...', 'info');
+            }
+        });
+        
+        // Initialize
+        loadFeatureState();
+    });
+</script>
+{% endblock %}
+```

@@ -1,0 +1,837 @@
+<!-- templates/wallet_warmup.html -->
+{% extends "base.html" %}
+
+{% block title %}Wallet WarmUp - BlockAI Pure MM{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tab-instance {
+        display: none;
+    }
+    
+    .tab-instance.active {
+        display: block;
+    }
+    
+    .transaction-log {
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: #1a1a1a;
+        color: #f8f8f8;
+        font-family: monospace;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+    
+    .log-entry {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #333;
+    }
+    
+    .log-success {
+        color: #00db87;
+    }
+    
+    .log-error {
+        color: #ff4d4d;
+    }
+    
+    .log-info {
+        color: #4da6ff;
+    }
+    
+    .log-warning {
+        color: #ffcc00;
+    }
+    
+    .wallet-input-area {
+        min-height: 150px;
+    }
+    
+    .token-input-group {
+        display: none;
+    }
+    
+    .token-input-group.active {
+        display: block;
+    }
+    
+    .instance-tab {
+        cursor: pointer;
+    }
+    
+    .instance-tab.active {
+        font-weight: bold;
+        background-color: #28a745 !important;
+        border-color: #28a745 !important;
+    }
+    
+    .solana-color {
+        color: #9945FF;
+    }
+    
+    .bg-solana {
+        background-color: #9945FF;
+        color: white;
+    }
+    
+    .btn-solana {
+        background-color: #9945FF;
+        color: white;
+    }
+    
+    .btn-solana:hover {
+        background-color: #7d37d6;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">
+        <span class="solana-color">Solana</span> Wallet WarmUp
+        <small class="text-muted fs-6">Warm up multiple wallets with token transactions</small>
+    </h1>
+    
+    <!-- Instance Tabs -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Instances</h5>
+                <button id="addInstanceBtn" class="btn btn-sm btn-success">
+                    <i class="bi bi-plus-lg"></i> Add Instance
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Each instance can warm up a different set of wallets with different tokens. Open up to 10 instances.</p>
+            
+            <div class="d-flex flex-wrap mb-3" id="instanceTabs">
+                <button class="btn btn-outline-success me-2 mb-2 instance-tab active" data-instance="1">Instance 1</button>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> Each instance will run independently. You can run multiple instances simultaneously.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Instance Configuration -->
+    <div id="instancesContainer">
+        <!-- Instance 1 -->
+        <div class="tab-instance active" data-instance="1">
+            <div class="card mb-4">
+                <div class="card-header bg-solana text-white">
+                    <h5 class="mb-0">Instance 1 Configuration</h5>
+                </div>
+                <div class="card-body">
+                    <form class="warm-up-form">
+                        <!-- Wallet Input Method -->
+                        <div class="mb-4">
+                            <h5>Wallet Input Method</h5>
+                            <div class="btn-group mb-3" role="group">
+                                <input type="radio" class="btn-check wallet-input-method" name="walletInputMethod-1" id="csvUpload-1" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="csvUpload-1">CSV Upload</label>
+                                
+                                <input type="radio" class="btn-check wallet-input-method" name="walletInputMethod-1" id="manualEntry-1" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="manualEntry-1">Manual Entry</label>
+                            </div>
+                            
+                            <div class="wallet-input-group csv-upload active" data-instance="1">
+                                <div class="mb-3">
+                                    <label for="csvFile-1" class="form-label">Upload CSV File</label>
+                                    <input type="file" class="form-control" id="csvFile-1" accept=".csv">
+                                    <div class="form-text">CSV should have a column with wallet private keys.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="csvPrivateKeyColumn-1" class="form-label">Private Key Column Name</label>
+                                    <input type="text" class="form-control" id="csvPrivateKeyColumn-1" placeholder="e.g., private_key" value="private_key">
+                                    <div class="form-text">The column name in the CSV that contains the private keys.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label>Preview of CSV Data</label>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered" id="csvPreview-1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Private Key</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-center">Upload a CSV file to see preview</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="wallet-input-group manual-entry" data-instance="1">
+                                <div class="mb-3">
+                                    <label for="privateKeys-1" class="form-label">Private Keys (one per line)</label>
+                                    <textarea class="form-control wallet-input-area" id="privateKeys-1" rows="6" placeholder="Enter one private key per line"></textarea>
+                                    <div class="form-text">Enter one private key per line. These are stored locally and never sent to our servers.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Token Configuration -->
+                        <div class="mb-4">
+                            <h5>Token Configuration</h5>
+                            <div class="mb-3">
+                                <label for="tokenCount-1" class="form-label">Number of Tokens</label>
+                                <select class="form-select token-count" id="tokenCount-1">
+                                    <option value="1">1 Token</option>
+                                    <option value="2">2 Tokens</option>
+                                    <option value="3">3 Tokens</option>
+                                    <option value="4">4 Tokens</option>
+                                    <option value="5">5 Tokens</option>
+                                    <option value="6">6 Tokens</option>
+                                    <option value="7">7 Tokens</option>
+                                    <option value="8">8 Tokens</option>
+                                    <option value="9">9 Tokens</option>
+                                    <option value="10">10 Tokens</option>
+                                </select>
+                                <div class="form-text">Select how many different tokens to use for warming up.</div>
+                            </div>
+                            
+                            <!-- Token Address Inputs -->
+                            <div id="tokenInputsContainer-1">
+                                <div class="token-input-group active" data-token="1" data-instance="1">
+                                    <div class="mb-3">
+                                        <label for="tokenAddress-1-1" class="form-label">Token Address 1</label>
+                                        <input type="text" class="form-control" id="tokenAddress-1-1" placeholder="Enter token address">
+                                        <div class="form-text">The Solana token address to use for transactions.</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Additional token inputs will be dynamically added here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Settings -->
+                        <div class="mb-4">
+                            <h5>Transaction Settings</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="gasFeeLamports-1" class="form-label">Gas Fee (Lamports)</label>
+                                        <input type="number" class="form-control" id="gasFeeLamports-1" value="5000" min="0">
+                                        <div class="form-text">Default gas fee in lamports.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="priorityFeeLamports-1" class="form-label">Priority Fee (Lamports)</label>
+                                        <input type="number" class="form-control" id="priorityFeeLamports-1" value="10000" min="0">
+                                        <div class="form-text">Default priority fee in lamports.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="shuffleWallets-1" checked>
+                                <label class="form-check-label" for="shuffleWallets-1">
+                                    Shuffle wallets before processing
+                                </label>
+                                <div class="form-text">Randomize the order of wallets for more natural warming.</div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="randomizeAmounts-1" checked>
+                                <label class="form-check-label" for="randomizeAmounts-1">
+                                    Randomize transaction amounts
+                                </label>
+                                <div class="form-text">Use slightly different amounts for each transaction.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Start Button -->
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-solana btn-lg start-warmup-btn" data-instance="1">
+                                <i class="bi bi-play-fill"></i> Start Wallet WarmUp
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-lg stop-warmup-btn" data-instance="1" style="display:none;">
+                                <i class="bi bi-stop-fill"></i> Stop Wallet WarmUp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Transaction Log -->
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Transaction Log</h5>
+                        <button class="btn btn-sm btn-secondary clear-log-btn" data-instance="1">
+                            <i class="bi bi-trash"></i> Clear Log
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="transaction-log" id="transactionLog-1">
+                        <div class="log-entry log-info">Wallet WarmUp ready. Configure your settings and click "Start Wallet WarmUp" to begin.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional instances will be dynamically added here -->
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let instanceCount = 1;
+        const MAX_INSTANCES = 10;
+        
+        // Load Solana RPC from settings
+        function loadSolanaRpc() {
+            const rpcUrl = localStorage.getItem('solanaRpcUrl') || 'https://api.mainnet-beta.solana.com';
+            console.log('Loaded Solana RPC URL:', rpcUrl);
+            return rpcUrl;
+        }
+        
+        // Initialize UI event listeners
+        initializeEventListeners();
+        
+        // Function to initialize event listeners
+        function initializeEventListeners() {
+            // Add instance button
+            document.getElementById('addInstanceBtn').addEventListener('click', addNewInstance);
+            
+            // Initial event listeners for instance 1
+            setupInstanceEventListeners(1);
+            
+            // Set up event listeners for wallet input method toggle
+            setupWalletInputMethodListeners(1);
+            
+            // Set up token count change listeners
+            setupTokenCountListeners(1);
+        }
+        
+        // Setup wallet input method listeners for an instance
+        function setupWalletInputMethodListeners(instanceId) {
+            const csvRadio = document.getElementById(`csvUpload-${instanceId}`);
+            const manualRadio = document.getElementById(`manualEntry-${instanceId}`);
+            
+            csvRadio.addEventListener('change', function() {
+                updateWalletInputMethod(instanceId);
+            });
+            
+            manualRadio.addEventListener('change', function() {
+                updateWalletInputMethod(instanceId);
+            });
+            
+            // CSV file upload handling
+            const csvFileInput = document.getElementById(`csvFile-${instanceId}`);
+            if (csvFileInput) {
+                csvFileInput.addEventListener('change', function() {
+                    handleCsvFileUpload(instanceId);
+                });
+            }
+        }
+        
+        // Setup token count listeners for an instance
+        function setupTokenCountListeners(instanceId) {
+            const tokenCountSelect = document.getElementById(`tokenCount-${instanceId}`);
+            
+            tokenCountSelect.addEventListener('change', function() {
+                updateTokenInputs(instanceId);
+            });
+        }
+        
+        // Setup warmup button listeners for an instance
+        function setupWarmupButtonListeners(instanceId) {
+            // Start warmup button
+            const startBtn = document.querySelector(`.start-warmup-btn[data-instance="${instanceId}"]`);
+            startBtn.addEventListener('click', function() {
+                startWarmup(instanceId);
+            });
+            
+            // Stop warmup button
+            const stopBtn = document.querySelector(`.stop-warmup-btn[data-instance="${instanceId}"]`);
+            stopBtn.addEventListener('click', function() {
+                stopWarmup(instanceId);
+            });
+            
+            // Clear log button
+            const clearLogBtn = document.querySelector(`.clear-log-btn[data-instance="${instanceId}"]`);
+            clearLogBtn.addEventListener('click', function() {
+                clearTransactionLog(instanceId);
+            });
+        }
+        
+        // Function to update wallet input method display
+        function updateWalletInputMethod(instanceId) {
+            const csvRadio = document.getElementById(`csvUpload-${instanceId}`);
+            const csvUploadDiv = document.querySelector(`.wallet-input-group.csv-upload[data-instance="${instanceId}"]`);
+            const manualEntryDiv = document.querySelector(`.wallet-input-group.manual-entry[data-instance="${instanceId}"]`);
+            
+            if (csvRadio.checked) {
+                csvUploadDiv.classList.add('active');
+                manualEntryDiv.classList.remove('active');
+            } else {
+                csvUploadDiv.classList.remove('active');
+                manualEntryDiv.classList.add('active');
+            }
+        }
+        
+        // Function to handle CSV file upload
+        function handleCsvFileUpload(instanceId) {
+            const file = document.getElementById(`csvFile-${instanceId}`).files[0];
+            if (!file) return;
+            
+            // Check if file is a CSV
+            if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+                addLogEntry(instanceId, 'Invalid file type. Please upload a CSV file.', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const contents = e.target.result;
+                const lines = contents.split('\n');
+                
+                // Check if file has header
+                if (lines.length < 2) {
+                    addLogEntry(instanceId, 'CSV file is empty or invalid.', 'error');
+                    return;
+                }
+                
+                // Parse header
+                const header = lines[0].split(',');
+                const privateKeyColumn = document.getElementById(`csvPrivateKeyColumn-${instanceId}`).value.trim().toLowerCase();
+                const privateKeyIndex = header.findIndex(col => col.trim().toLowerCase() === privateKeyColumn);
+                
+                if (privateKeyIndex === -1) {
+                    addLogEntry(instanceId, `CSV file must have a column named "${privateKeyColumn}".`, 'error');
+                    return;
+                }
+                
+                // Parse data and update preview
+                const previewTable = document.getElementById(`csvPreview-${instanceId}`);
+                const tbody = previewTable.querySelector('tbody');
+                tbody.innerHTML = '';
+                
+                let walletCount = 0;
+                
+                for (let i = 1; i < lines.length && i < 6; i++) {
+                    if (!lines[i].trim()) continue;
+                    
+                    const columns = lines[i].split(',');
+                    if (columns.length <= privateKeyIndex) continue;
+                    
+                    const privateKey = columns[privateKeyIndex].trim();
+                    
+                    if (!privateKey) continue;
+                    
+                    walletCount++;
+                    
+                    const row = document.createElement('tr');
+                    const cell = document.createElement('td');
+                    // Show first few characters and then asterisks
+                    cell.textContent = privateKey.substring(0, 6) + '...' + privateKey.substring(privateKey.length - 4);
+                    
+                    row.appendChild(cell);
+                    tbody.appendChild(row);
+                }
+                
+                // Add a summary row if there are more wallets
+                if (lines.length > 6) {
+                    const row = document.createElement('tr');
+                    const cell = document.createElement('td');
+                    cell.colSpan = 1;
+                    cell.textContent = `... and ${lines.length - 6} more wallets`;
+                    cell.className = 'text-center';
+                    row.appendChild(cell);
+                    tbody.appendChild(row);
+                }
+                
+                // Count total valid wallets (excluding header)
+                let totalWallets = 0;
+                for (let i = 1; i < lines.length; i++) {
+                    if (!lines[i].trim()) continue;
+                    
+                    const columns = lines[i].split(',');
+                    if (columns.length <= privateKeyIndex) continue;
+                    
+                    const privateKey = columns[privateKeyIndex].trim();
+                    if (privateKey) totalWallets++;
+                }
+                
+                addLogEntry(instanceId, `CSV file loaded with ${totalWallets} wallets.`, 'info');
+            };
+            
+            reader.onerror = function() {
+                addLogEntry(instanceId, 'Error reading CSV file.', 'error');
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // Function to update token inputs
+        function updateTokenInputs(instanceId) {
+            const tokenCount = parseInt(document.getElementById(`tokenCount-${instanceId}`).value);
+            const container = document.getElementById(`tokenInputsContainer-${instanceId}`);
+            
+            // First, hide all existing token input groups
+            const existingGroups = container.querySelectorAll(`.token-input-group[data-instance="${instanceId}"]`);
+            existingGroups.forEach(group => {
+                group.classList.remove('active');
+            });
+            
+            // Create or show token input groups as needed
+            for (let i = 1; i <= tokenCount; i++) {
+                let tokenGroup = container.querySelector(`.token-input-group[data-token="${i}"][data-instance="${instanceId}"]`);
+                
+                if (!tokenGroup) {
+                    // Create new token input group
+                    tokenGroup = document.createElement('div');
+                    tokenGroup.className = 'token-input-group';
+                    tokenGroup.dataset.token = i;
+                    tokenGroup.dataset.instance = instanceId;
+                    
+                    tokenGroup.innerHTML = `
+                        <div class="mb-3">
+                            <label for="tokenAddress-${instanceId}-${i}" class="form-label">Token Address ${i}</label>
+                            <input type="text" class="form-control" id="tokenAddress-${instanceId}-${i}" placeholder="Enter token address">
+                            <div class="form-text">The Solana token address to use for transactions.</div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(tokenGroup);
+                }
+                
+                // Show this token input group
+                tokenGroup.classList.add('active');
+            }
+        }
+        
+        // Function to add a new instance
+        function addNewInstance() {
+            if (instanceCount >= MAX_INSTANCES) {
+                alert(`Maximum of ${MAX_INSTANCES} instances allowed.`);
+                return;
+            }
+            
+            instanceCount++;
+            
+            // Add instance tab
+            const tabsContainer = document.getElementById('instanceTabs');
+            const newTab = document.createElement('button');
+            newTab.className = 'btn btn-outline-success me-2 mb-2 instance-tab';
+            newTab.dataset.instance = instanceCount;
+            newTab.textContent = `Instance ${instanceCount}`;
+            
+            newTab.addEventListener('click', function() {
+                switchInstance(instanceCount);
+            });
+            
+            tabsContainer.appendChild(newTab);
+            
+            // Create instance content by cloning the first instance
+            const instancesContainer = document.getElementById('instancesContainer');
+            const firstInstance = document.querySelector('.tab-instance[data-instance="1"]');
+            const newInstance = firstInstance.cloneNode(true);
+            
+            // Update instance IDs and data attributes
+            newInstance.dataset.instance = instanceCount;
+            newInstance.classList.remove('active');
+            
+            // Update all IDs and data attributes within the new instance
+            const elementsWithId = newInstance.querySelectorAll('[id]');
+            elementsWithId.forEach(el => {
+                el.id = el.id.replace(/-1($|-)/, `-${instanceCount}$1`);
+            });
+            
+            const elementsWithDataInstance = newInstance.querySelectorAll('[data-instance]');
+            elementsWithDataInstance.forEach(el => {
+                el.dataset.instance = instanceCount;
+            });
+            
+            // Update header
+            const headerTitle = newInstance.querySelector('.card-header h5');
+            headerTitle.textContent = `Instance ${instanceCount} Configuration`;
+            
+            // Clear any existing logs and previews
+            const transactionLog = newInstance.querySelector('.transaction-log');
+            transactionLog.innerHTML = '<div class="log-entry log-info">Wallet WarmUp ready. Configure your settings and click "Start Wallet WarmUp" to begin.</div>';
+            
+            const csvPreview = newInstance.querySelector(`#csvPreview-${instanceCount} tbody`);
+            csvPreview.innerHTML = '<tr><td class="text-center">Upload a CSV file to see preview</td></tr>';
+            
+            // Reset form values
+            const form = newInstance.querySelector('form');
+            form.reset();
+            
+            // Add the new instance to the container
+            instancesContainer.appendChild(newInstance);
+            
+            // Set up event listeners for the new instance
+            setupInstanceEventListeners(instanceCount);
+            
+            // Switch to the new instance
+            switchInstance(instanceCount);
+        }
+        
+        // Function to set up all event listeners for an instance
+        function setupInstanceEventListeners(instanceId) {
+            setupWalletInputMethodListeners(instanceId);
+            setupTokenCountListeners(instanceId);
+            setupWarmupButtonListeners(instanceId);
+        }
+        
+        // Function to switch between instances
+        function switchInstance(instanceId) {
+            // Update active tab
+            const allTabs = document.querySelectorAll('.instance-tab');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const selectedTab = document.querySelector(`.instance-tab[data-instance="${instanceId}"]`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            // Update active instance content
+            const allInstances = document.querySelectorAll('.tab-instance');
+            allInstances.forEach(instance => {
+                instance.classList.remove('active');
+            });
+            
+            const selectedInstance = document.querySelector(`.tab-instance[data-instance="${instanceId}"]`);
+            if (selectedInstance) {
+                selectedInstance.classList.add('active');
+            }
+        }
+        
+        // Function to start wallet warmup
+        function startWarmup(instanceId) {
+            // Get configuration
+            const configuration = getWarmupConfiguration(instanceId);
+            
+            if (!configuration.wallets || configuration.wallets.length === 0) {
+                addLogEntry(instanceId, 'No wallets provided. Please add wallet private keys.', 'error');
+                return;
+            }
+            
+            if (!configuration.tokenAddresses || configuration.tokenAddresses.length === 0) {
+                addLogEntry(instanceId, 'No token addresses provided. Please add at least one token address.', 'error');
+                return;
+            }
+            
+            // Update UI
+            const startBtn = document.querySelector(`.start-warmup-btn[data-instance="${instanceId}"]`);
+            const stopBtn = document.querySelector(`.stop-warmup-btn[data-instance="${instanceId}"]`);
+            
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'block';
+            
+            // Log start
+            addLogEntry(instanceId, `Starting wallet warmup for ${configuration.wallets.length} wallets with ${configuration.tokenAddresses.length} tokens.`, 'info');
+            
+            // Shuffle wallets if enabled
+            if (configuration.shuffleWallets) {
+                configuration.wallets = shuffleArray(configuration.wallets);
+                addLogEntry(instanceId, 'Wallets have been shuffled for processing.', 'info');
+            }
+            
+            // Start simulation
+            simulateWarmup(instanceId, configuration);
+        }
+        
+        // Function to stop wallet warmup
+        function stopWarmup(instanceId) {
+            // Set a flag to stop the simulation
+            window[`stopWarmup${instanceId}`] = true;
+            
+            // Update UI
+            const startBtn = document.querySelector(`.start-warmup-btn[data-instance="${instanceId}"]`);
+            const stopBtn = document.querySelector(`.stop-warmup-btn[data-instance="${instanceId}"]`);
+            
+            startBtn.style.display = 'block';
+            stopBtn.style.display = 'none';
+            
+            addLogEntry(instanceId, 'Wallet warmup stopped by user.', 'warning');
+        }
+        
+        // Function to clear transaction log
+        function clearTransactionLog(instanceId) {
+            const log = document.getElementById(`transactionLog-${instanceId}`);
+            log.innerHTML = '<div class="log-entry log-info">Log cleared. Ready for new transactions.</div>';
+        }
+        
+        // Function to get warmup configuration
+        function getWarmupConfiguration(instanceId) {
+            const configuration = {
+                wallets: [],
+                tokenAddresses: [],
+                gasFeeLamports: parseInt(document.getElementById(`gasFeeLamports-${instanceId}`).value) || 5000,
+                priorityFeeLamports: parseInt(document.getElementById(`priorityFeeLamports-${instanceId}`).value) || 10000,
+                shuffleWallets: document.getElementById(`shuffleWallets-${instanceId}`).checked,
+                randomizeAmounts: document.getElementById(`randomizeAmounts-${instanceId}`).checked,
+                rpcUrl: loadSolanaRpc()
+            };
+            
+            // Get wallets
+            const isUsingCsv = document.getElementById(`csvUpload-${instanceId}`).checked;
+            
+            if (isUsingCsv) {
+                const csvFile = document.getElementById(`csvFile-${instanceId}`).files[0];
+                if (csvFile) {
+                    // This would extract wallets from the CSV, but for simulation we'll use dummy data
+                    // In a real implementation, you'd parse the CSV file and extract the private keys
+                    
+                    // For simulation, we'll generate some dummy private keys
+                    for (let i = 0; i < 10; i++) {
+                        configuration.wallets.push(`SolanaPrivateKey_${i}_Instance${instanceId}`);
+                    }
+                }
+            } else {
+                const privateKeysText = document.getElementById(`privateKeys-${instanceId}`).value;
+                const lines = privateKeysText.split('\n');
+                
+                for (const line of lines) {
+                    const privateKey = line.trim();
+                    if (privateKey) {
+                        configuration.wallets.push(privateKey);
+                    }
+                }
+            }
+            
+            // Get token addresses
+            const tokenCount = parseInt(document.getElementById(`tokenCount-${instanceId}`).value);
+            
+            for (let i = 1; i <= tokenCount; i++) {
+                const tokenAddress = document.getElementById(`tokenAddress-${instanceId}-${i}`).value.trim();
+                if (tokenAddress) {
+                    configuration.tokenAddresses.push(tokenAddress);
+                }
+            }
+            
+            return configuration;
+        }
+        
+        // Function to simulate wallet warmup
+        function simulateWarmup(instanceId, configuration) {
+            // Reset stop flag
+            window[`stopWarmup${instanceId}`] = false;
+            
+            let walletIndex = 0;
+            let tokenIndex = 0;
+            
+            function processNextWallet() {
+                if (window[`stopWarmup${instanceId}`] || walletIndex >= configuration.wallets.length) {
+                    if (!window[`stopWarmup${instanceId}`]) {
+                        addLogEntry(instanceId, 'Wallet warmup completed successfully!', 'success');
+                        
+                        // Update UI
+                        const startBtn = document.querySelector(`.start-warmup-btn[data-instance="${instanceId}"]`);
+                        const stopBtn = document.querySelector(`.stop-warmup-btn[data-instance="${instanceId}"]`);
+                        
+                        startBtn.style.display = 'block';
+                        stopBtn.style.display = 'none';
+                    }
+                    return;
+                }
+                
+                const wallet = configuration.wallets[walletIndex];
+                const tokenAddress = configuration.tokenAddresses[tokenIndex % configuration.tokenAddresses.length];
+                
+                // Move to next wallet and token
+                walletIndex++;
+                tokenIndex = (tokenIndex + 1) % configuration.tokenAddresses.length;
+                
+                // Generate random amount if enabled
+                let amount = 0.001; // Default amount
+                if (configuration.randomizeAmounts) {
+                    // Generate an amount between 0.0001 and 0.01
+                    amount = (Math.random() * 0.0099 + 0.0001).toFixed(6);
+                }
+                
+                // Simulate the transaction
+                simulateTransaction(instanceId, wallet, tokenAddress, amount, configuration);
+                
+                // Process next wallet after a random delay
+                setTimeout(processNextWallet, Math.random() * 1000 + 500);
+            }
+            
+            // Start processing
+            processNextWallet();
+        }
+        
+        // Function to simulate a single transaction
+        function simulateTransaction(instanceId, wallet, tokenAddress, amount, configuration) {
+            // Mask the wallet private key for display
+            const maskedWallet = wallet.substring(0, 6) + '...' + wallet.substring(wallet.length - 4);
+            
+            // Log the transaction initiation
+            addLogEntry(instanceId, `Initiating transaction from wallet ${maskedWallet} with token ${tokenAddress.substring(0, 8)}...`, 'info');
+            
+            // Simulate transaction preparation
+            setTimeout(() => {
+                addLogEntry(instanceId, `Preparing transaction: ${amount} tokens with gas fee ${configuration.gasFeeLamports} lamports`, 'info');
+                
+                // Simulate transaction submission
+                setTimeout(() => {
+                    addLogEntry(instanceId, `Submitting transaction to ${configuration.rpcUrl}...`, 'info');
+                    
+                    // Simulate transaction confirmation
+                    setTimeout(() => {
+                        // 90% chance of success
+                        if (Math.random() > 0.1) {
+                            // Generate a fake transaction signature
+                            const txSignature = '5' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                            
+                            addLogEntry(instanceId, `✅ Transaction successful! Signature: ${txSignature}`, 'success');
+                            addLogEntry(instanceId, `🔍 Explorer link: https://explorer.solana.com/tx/${txSignature}`, 'info');
+                        } else {
+                            // Simulate an error
+                            addLogEntry(instanceId, `❌ Transaction failed: Insufficient funds or RPC error`, 'error');
+                        }
+                    }, Math.random() * 1000 + 500);
+                }, Math.random() * 1000 + 500);
+            }, Math.random() * 1000 + 300);
+        }
+        
+        // Utility function to add log entry
+        function addLogEntry(instanceId, message, type = 'info') {
+            const log = document.getElementById(`transactionLog-${instanceId}`);
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            
+            // Add timestamp
+            const now = new Date();
+            const timestamp = `[${now.toLocaleTimeString()}] `;
+            
+            // Construct message with timestamp
+            entry.textContent = timestamp + message;
+            
+            // Add to log
+            log.appendChild(entry);
+            
+            // Scroll to bottom
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // Utility function to shuffle an array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+    });
+</script>
+{% endblock %}
