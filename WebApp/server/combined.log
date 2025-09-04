@@ -1,0 +1,294 @@
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:29:44.541Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:29:44.554Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:29:44.556Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:29:53.692Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:29:53.703Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:29:53.705Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:32:57.955Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:32:57.963Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:32:57.964Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:39:30.614Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:39:30.624Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:39:30.628Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:41:34.895Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:41:34.905Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:41:34.906Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:41:42.950Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:41:42.960Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:41:42.963Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:45:29.162Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:45:29.170Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:45:29.171Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:45:43.065Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:45:43.074Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:45:43.076Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:46:15.469Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:46:15.476Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:46:15.478Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:46:24.851Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:46:24.859Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:46:24.860Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:46:32.571Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:46:32.580Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:46:32.583Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:55:27.953Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:55:27.976Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:55:27.978Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:55:42.715Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:55:42.722Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:55:42.724Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T17:56:51.357Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T17:56:51.365Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T17:56:51.367Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:06:01.451Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:06:01.461Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:06:01.462Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:15:17.586Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:15:17.593Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:15:17.595Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:15:37.390Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:15:37.401Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:15:37.403Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:27:55.131Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:27:55.143Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:27:55.150Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:28:51.036Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:28:51.045Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:28:51.049Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:28:58.746Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:28:58.752Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:28:58.754Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:29:04.872Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:29:04.880Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:29:04.882Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:29:11.730Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:29:11.738Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:29:11.740Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:29:18.536Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:29:18.542Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:29:18.544Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:29:26.649Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:29:26.657Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:29:26.659Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:45:35.879Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:45:35.887Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:45:35.889Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-12T18:45:43.094Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-12T18:45:43.112Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-12T18:45:43.116Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T11:21:13.783Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T11:21:13.790Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T11:21:13.791Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T12:17:33.914Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T12:17:33.925Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T12:17:33.927Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T12:18:21.975Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T12:18:21.983Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T12:18:21.985Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T12:58:43.242Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T12:58:43.250Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T12:58:43.252Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T12:59:01.169Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T12:59:01.178Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T12:59:01.180Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T12:59:33.565Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T12:59:33.576Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T12:59:33.579Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:11:25.537Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:11:25.561Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:11:25.563Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:15:59.151Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:15:59.162Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:15:59.168Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:19:49.767Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:19:49.788Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:19:49.793Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:22:27.378Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:22:27.388Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:22:27.390Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:24:58.057Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:24:58.074Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:24:58.078Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T13:29:16.100Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T13:29:16.110Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T13:29:16.112Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T14:34:39.683Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T14:34:39.705Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T14:34:39.713Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T14:54:03.295Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T14:54:03.304Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T14:54:03.310Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T14:59:55.447Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T14:59:55.455Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T14:59:55.457Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:00:06.933Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:00:06.946Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:00:06.949Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:04:32.810Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:04:32.831Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:04:32.839Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:04:45.281Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:04:45.325Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:04:45.339Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:25:03.648Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:25:03.656Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:25:03.658Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:25:53.835Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:25:53.844Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:25:53.846Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:26:09.381Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:26:09.389Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:26:09.391Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:35:03.676Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:35:03.683Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:35:03.685Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:39:29.819Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:39:29.829Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:39:29.830Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T15:41:43.309Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T15:41:43.317Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T15:41:43.319Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T16:29:33.383Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T16:29:33.415Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T16:29:33.428Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T16:33:59.877Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T16:33:59.885Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T16:33:59.886Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T17:30:17.010Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T17:30:17.021Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T17:30:17.023Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T17:55:25.164Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T17:55:25.175Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T17:55:25.177Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T17:59:39.997Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T17:59:40.004Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T17:59:40.006Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T18:03:18.926Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T18:03:18.938Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T18:03:18.943Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-13T18:09:06.065Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-13T18:09:06.083Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-13T18:09:06.085Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:25:00.997Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:25:01.008Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:25:01.010Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:39:09.985Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:39:09.994Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:39:09.996Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:39:23.058Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:39:23.067Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:39:23.068Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:39:42.065Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:39:42.075Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:39:42.077Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:41:50.420Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:41:50.428Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:41:50.433Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:42:04.011Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:42:04.018Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:42:04.021Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:42:26.696Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:42:26.704Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:42:26.709Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:54:25.372Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:54:25.383Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:54:25.388Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:55:35.301Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:55:35.309Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:55:35.311Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:56:11.997Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:56:12.010Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:56:12.011Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:57:52.638Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:57:52.648Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:57:52.654Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:59:41.139Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:59:41.151Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:59:41.158Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T15:59:48.788Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T15:59:48.797Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T15:59:48.802Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:00:30.847Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:00:30.857Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:00:30.859Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:00:40.835Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:00:40.843Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:00:40.845Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:01:13.150Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:01:13.160Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:01:13.162Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:33:04.123Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:33:04.132Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:33:04.135Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:43:07.411Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:43:07.418Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:43:07.421Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:43:42.889Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:43:42.904Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:43:42.906Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:46:48.189Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:46:48.196Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:46:48.198Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:49:44.676Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:49:44.685Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:49:44.687Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:50:04.774Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:50:04.783Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:50:04.784Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:50:25.266Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:50:25.275Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:50:25.277Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T16:50:35.860Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T16:50:35.869Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T16:50:35.871Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T17:57:52.434Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T17:57:52.449Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T17:57:52.451Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-14T18:45:27.458Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-14T18:45:27.467Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-14T18:45:27.469Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-15T08:35:29.818Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-15T08:35:29.829Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-15T08:35:29.840Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-16T16:48:08.322Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-16T16:48:08.335Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-16T16:48:08.337Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:02:08.671Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:02:08.683Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:02:08.684Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:08:53.050Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:08:53.059Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:08:53.064Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:09:54.835Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:09:54.846Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:09:54.848Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:10:18.997Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:10:19.039Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:10:19.046Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:10:50.205Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:10:50.214Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:10:50.221Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:11:15.309Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:11:15.337Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:11:15.342Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:33:40.337Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:33:40.360Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:33:40.362Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:34:59.387Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:34:59.397Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:34:59.399Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:35:18.924Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:35:18.939Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:35:18.943Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:35:46.552Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:35:46.561Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:35:46.563Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-06-17T10:36:27.388Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-06-17T10:36:27.398Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-17T10:36:27.406Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-07-25T16:56:57.859Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-07-25T16:56:57.874Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-07-25T16:56:57.876Z"}
+{"level":"info","message":"Server running on port 5001","timestamp":"2025-08-05T13:02:43.933Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-08-05T13:02:43.941Z"}
+{"level":"info","message":"Connected to Redis","timestamp":"2025-08-05T13:02:43.942Z"}

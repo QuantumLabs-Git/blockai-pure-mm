@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Starting BlockAI Pure MM - Separate Terminals"
+echo ""
+echo "Please open 2 terminal windows and run:"
+echo ""
+echo "Terminal 1 (Backend):"
+echo "  cd $(pwd)/server"
+echo "  npm run dev"
+echo ""
+echo "Terminal 2 (Frontend):"
+echo "  cd $(pwd)/client"
+echo "  npm run dev"
+echo ""
+echo "The app will be available at http://localhost:5173"

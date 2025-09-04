@@ -1,0 +1,31 @@
+{
+  "config": {
+    "instance_id": "warmup_1748098448624",
+    "wallets": [
+      "59wh9XnSzs9EwCrdNuF7AAePAmuBxjLpJXp8FZ68wtRqLhAEfUZg2HEf6RbYcUNhK32HiLZX2nYdvjjpB89Fengh",
+      "3J2vs9cKL1varfRkatz73LCcppmxyFNHXLPMASVU57DvxFMU74T6GY7YGRBZPSx7yzrjutf5HNqHaE3c5GR5vGXy",
+      "R9HLtMpwiaRoNXhTvvRGYzY2J4eVRPMBcLsJtKqCWYDSjp44NDhLMfZZTAzqKWR9vjYsX6J9BBcGcjKVVoq6L6N",
+      "5SwuE9amGRmGToozi3jhHryKEVkqtjJD9XUehGbzdXKcvPnbvwrE7KXUJsPpyvtYRXzcwo2gKH29WXadEpdhTtT6",
+      "5vRfk8m7v59Vgs5eEUKwHEGMVMxDw9TpdCnrtjBHHukeaBA3f7MibX6zFw5gWby6g2dATSQNJqzqxY7oVYFAQLSY",
+      "4oY7inJTxu4JaNjpo6o9qkx8gmFqVcevTJaAa1osuAkHZsRmM6keyt2KrT1w1mQm4B6ikkEp7r7SY9TK6KJwbtbW",
+      "2qogucQdoTWieL59Br3NjFTckBP4HAp1Znyurfnk96jC2ohGhKVTa9ttGTaT2SDZBeKhjAihjXdMfmWCMQeUXfVz",
+      "5AvHvZ7WMqBfo13gUG1fteodgWNSUUzyVfzCiR39pUUozkpS9pt6jXzV5hZBJ6bCxwe4RNULtf8g2yMQbuRPJzrX",
+      "3k3KPPMCnxcxYGozjf9WQwQtoyuGnGqAo8dMt7XW4DtjSWkAxyVxGBamHtnSSHTdjTKuftmSi1FvjU3NRMpXRKqK",
+      "5z3TRFWHpkfrpQ7pUKWYRu2Vq6YzRimaMvMCd29X5uacMFpVnufGLkGt8UHE5Z4gMNRKp9YMLNMTaBPM5p3LKQwi"
+    ],
+    "tokens": [
+      "HhJpBhRRn4g56VsyLuT8DL5Bv31HkXqsrahTTUCZeZg4"
+    ],
+    "amount": 0.05,
+    "time_period": 60,
+    "rpc_url": "https://mainnet.helius-rpc.com/?api-key=c3ccc39d-a8c8-40ec-880d-40ac14e92533",
+    "gas_fee": 5000,
+    "priority_fee": 10000,
+    "shuffle_wallets": true,
+    "randomize_amounts": true,
+    "simulation_mode": false
+  },
+  "process_id": "warmup_1748098448624",
+  "is_simulation": false,
+  "timestamp": 1748098448643
+}

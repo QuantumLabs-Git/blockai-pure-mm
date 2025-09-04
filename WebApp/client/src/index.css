@@ -1,0 +1,841 @@
+/* Modern, sleek styles for BlockAI Pure MM */
+
+:root {
+  /* Neutral palette with accent colors per blockchain */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1a1a1a;
+  --bg-card: #181818;
+  --bg-hover: rgba(255, 255, 255, 0.03);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Blockchain accent colors - darker/muted versions */
+  --ethereum-color: #4A5A9F;
+  --solana-color: #00A66E;
+  --bsc-color: #B8901F;
+  --base-color: #003DB8;
+  --sui-color: #4A8FAE;
+  
+  /* Glow effects - reduced */
+  --glow-strength: 0 0 10px;
+  --glow-strength-strong: 0 0 20px;
+  
+  /* Transitions */
+  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Glass morphism base */
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+}
+
+/* Navigation enhancements */
+.navbar {
+  background: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  transition: var(--transition-medium);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: var(--transition-fast);
+}
+
+.navbar-brand:hover {
+  transform: translateX(5px);
+}
+
+.nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition-fast);
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.25rem;
+  border-radius: 8px;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color, var(--text-primary));
+  transition: var(--transition-fast);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: var(--text-primary) !important;
+  background: var(--bg-hover);
+}
+
+.nav-link.active {
+  color: var(--text-primary) !important;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active::before {
+  width: 80%;
+  background: var(--accent-color, var(--text-primary));
+}
+
+/* Bootstrap nav-tabs specific styling */
+.nav-tabs {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-tabs .nav-link {
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px 8px 0 0;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-color: var(--border-color);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--bg-primary) !important;
+  background: var(--text-primary) !important;
+  border-color: var(--border-color) var(--border-color) var(--text-primary);
+}
+
+/* Dark theme tab variant */
+.nav-tabs-dark .nav-link.active {
+  color: var(--text-primary) !important;
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) var(--border-color) var(--bg-card);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--text-primary) !important;
+  background: var(--bg-card);
+  border-color: var(--border-color) var(--border-color) var(--bg-card);
+  border-bottom: 1px solid var(--bg-card);
+}
+
+/* Fix for active tab text contrast */
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.active:hover,
+.nav-tabs .nav-link.active:focus {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-card) !important;
+}
+
+/* Dynamic accent colors based on selected chain */
+[data-chain="ethereum"] {
+  --accent-color: var(--ethereum-color);
+  --accent-rgb: 74, 90, 159;
+  --chain-bg: rgba(74, 90, 159, 0.1);
+  --chain-border: rgba(74, 90, 159, 0.3);
+}
+
+[data-chain="solana"] {
+  --accent-color: var(--solana-color);
+  --accent-rgb: 0, 166, 110;
+  --chain-bg: rgba(0, 166, 110, 0.1);
+  --chain-border: rgba(0, 166, 110, 0.3);
+}
+
+[data-chain="bsc"] {
+  --accent-color: var(--bsc-color);
+  --accent-rgb: 184, 144, 31;
+  --chain-bg: rgba(184, 144, 31, 0.1);
+  --chain-border: rgba(184, 144, 31, 0.3);
+}
+
+[data-chain="base"] {
+  --accent-color: var(--base-color);
+  --accent-rgb: 0, 61, 184;
+  --chain-bg: rgba(0, 61, 184, 0.1);
+  --chain-border: rgba(0, 61, 184, 0.3);
+}
+
+[data-chain="sui"] {
+  --accent-color: var(--sui-color);
+  --accent-rgb: 74, 143, 174;
+  --chain-bg: rgba(74, 143, 174, 0.1);
+  --chain-border: rgba(74, 143, 174, 0.3);
+}
+
+/* Modern card design */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-medium);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--accent-color, var(--text-primary)), 
+    transparent
+  );
+  opacity: 0;
+  transition: var(--transition-medium);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-color, var(--border-hover));
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0 0 20px rgba(var(--accent-rgb, 255, 255, 255), 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Futuristic buttons */
+.btn {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: #2A3A5F;
+  color: var(--text-primary);
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background: #354567;
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgba(42, 58, 95, 0.3);
+  border-color: #354567;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: #5F2A2A;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #6F3333;
+  box-shadow: 0 0 8px rgba(95, 42, 42, 0.3);
+}
+
+.btn-success {
+  background: #2A5F3A;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #336F45;
+  box-shadow: 0 0 8px rgba(42, 95, 58, 0.3);
+}
+
+.btn-warning {
+  background: #5F4A2A;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: #6F5633;
+  box-shadow: 0 0 8px rgba(95, 74, 42, 0.3);
+}
+
+.btn-info {
+  background: #2A4A5F;
+  color: white;
+}
+
+.btn-info:hover {
+  background: #33566F;
+  box-shadow: 0 0 8px rgba(42, 74, 95, 0.3);
+}
+
+/* Form controls with modern styling */
+.form-control,
+.form-select {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: var(--transition-fast);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: var(--bg-secondary);
+  border-color: var(--accent-color, var(--border-hover));
+  box-shadow: 0 0 0 1px var(--accent-color, var(--border-hover));
+  color: var(--text-primary);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Modern select dropdown */
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+/* Chain selector special styling */
+#chainSelector,
+select[value*="ethereum"],
+select[value*="solana"],
+select[value*="bsc"],
+select[value*="base"],
+select[value*="sui"] {
+  border-color: var(--accent-color, var(--border-color));
+}
+
+/* Chain selector in navbar */
+.navbar select.form-select {
+  border-color: var(--accent-color, var(--border-color));
+  background-color: var(--chain-bg, var(--bg-tertiary));
+}
+
+.navbar select.form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+}
+
+/* Loading spinner */
+.spinner-border {
+  border-color: var(--accent-color, var(--text-secondary));
+  border-right-color: transparent;
+}
+
+/* Table styling */
+.table {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.table thead th {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-color: var(--border-color);
+  padding: 1rem;
+}
+
+.table tbody td {
+  border-color: var(--border-color);
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: var(--transition-fast);
+}
+
+.table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+/* Footer */
+footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+}
+
+.dropdown-item {
+  color: var(--text-secondary);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  transition: var(--transition-fast);
+}
+
+.dropdown-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.dropdown-divider {
+  border-color: var(--border-color);
+  margin: 0.5rem 0;
+}
+
+/* Badge styling */
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Alert styling */
+.alert {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+}
+
+.alert-success {
+  border-color: rgba(0, 166, 110, 0.3);
+  background: rgba(0, 166, 110, 0.08);
+}
+
+.alert-danger {
+  border-color: rgba(184, 51, 51, 0.3);
+  background: rgba(184, 51, 51, 0.08);
+}
+
+.alert-warning {
+  border-color: rgba(184, 144, 31, 0.3);
+  background: rgba(184, 144, 31, 0.08);
+}
+
+.alert-info {
+  border-color: rgba(74, 90, 159, 0.3);
+  background: rgba(74, 90, 159, 0.08);
+}
+
+/* Modal styling */
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  border-radius: 0 0 16px 16px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 3px var(--accent-color, rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    box-shadow: 0 0 10px var(--accent-color, rgba(255, 255, 255, 0.3));
+  }
+  100% {
+    box-shadow: 0 0 3px var(--accent-color, rgba(255, 255, 255, 0.2));
+  }
+}
+
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Hover shadow effect */
+.hover-shadow {
+  transition: var(--transition-medium);
+}
+
+.hover-shadow:hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-hover);
+  border-radius: 5px;
+  border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Blockchain specific accents */
+.ethereum-accent { color: var(--ethereum-color); }
+.solana-accent { color: var(--solana-color); }
+.bsc-accent { color: var(--bsc-color); }
+.base-accent { color: var(--base-color); }
+.sui-accent { color: var(--sui-color); }
+
+/* Chain-themed components */
+.chain-card {
+  background: var(--chain-bg, var(--bg-card));
+  border: 1px solid var(--chain-border, var(--border-color));
+}
+
+.chain-badge {
+  background: var(--chain-bg, rgba(255, 255, 255, 0.1));
+  color: var(--accent-color, var(--text-primary));
+  border: 1px solid var(--chain-border, var(--border-color));
+}
+
+.chain-button {
+  background: var(--accent-color, var(--primary-color));
+  border-color: var(--accent-color, var(--primary-color));
+  color: white;
+}
+
+.chain-button:hover {
+  background: var(--chain-bg);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.chain-text {
+  color: var(--accent-color, var(--text-primary));
+}
+
+.chain-border {
+  border-color: var(--accent-color, var(--border-color)) !important;
+}
+
+.chain-glow {
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+}
+
+/* Chain-specific nav styling */
+.nav-link.active {
+  border-bottom-color: var(--accent-color, var(--text-primary));
+}
+
+/* Chain-specific form controls */
+.form-control:focus {
+  border-color: var(--accent-color, var(--border-hover));
+  box-shadow: 0 0 0 1px var(--accent-color, var(--border-hover));
+}
+
+/* Chain-specific progress bars */
+.progress-bar {
+  background-color: var(--accent-color, #4A5A9F) !important;
+}
+
+/* Status indicators with glow */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.status-running {
+  background: #00A055;
+  box-shadow: 0 0 5px rgba(0, 160, 85, 0.3);
+}
+
+.status-stopped {
+  background: #B83333;
+  box-shadow: 0 0 5px rgba(184, 51, 51, 0.3);
+}
+
+.status-paused {
+  background: #CC8800;
+  box-shadow: 0 0 5px rgba(204, 136, 0, 0.3);
+}
+
+/* Feature cards on dashboard */
+.feature-card {
+  height: 100%;
+  transition: var(--transition-medium);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-color, var(--text-primary));
+  transform: scaleX(0);
+  transition: var(--transition-fast);
+  transform-origin: left;
+}
+
+.feature-card:hover::after {
+  transform: scaleX(1);
+}
+
+.feature-card .card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  transition: var(--transition-fast);
+}
+
+.feature-card:hover i {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .card {
+    border-radius: 12px;
+  }
+  
+  .btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Remove Bootstrap's default colors and use our palette */
+.bg-primary { background-color: #2A3A5F !important; }
+.bg-secondary { background-color: var(--bg-secondary) !important; }
+.bg-dark { background-color: var(--bg-primary) !important; }
+.bg-success { background-color: #2A5F3A !important; }
+.bg-danger { background-color: #5F2A2A !important; }
+.bg-warning { background-color: #5F4A2A !important; }
+.bg-info { background-color: #2A4A5F !important; }
+.text-primary { color: #4A5A9F !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-success { color: #4A7A5F !important; }
+.text-danger { color: #8F4A4A !important; }
+.text-warning { color: #8F6A4A !important; }
+.text-info { color: #4A6A8F !important; }
+.border { border-color: var(--border-color) !important; }
+.border-primary { border-color: #2A3A5F !important; }
+.border-success { border-color: #2A5F3A !important; }
+.border-danger { border-color: #5F2A2A !important; }
+.border-warning { border-color: #5F4A2A !important; }
+.border-info { border-color: #2A4A5F !important; }
+
+/* Override Bootstrap button colors */
+.btn-primary:focus,
+.btn-secondary:focus {
+  box-shadow: none;
+}
+
+/* Progress bars with muted colors */
+.progress-bar {
+  background-color: var(--accent-color, #4A5A9F) !important;
+}
+
+.progress-bar-success {
+  background-color: #2A5F3A !important;
+}
+
+.progress-bar-info {
+  background-color: #2A4A5F !important;
+}
+
+.progress-bar-warning {
+  background-color: #5F4A2A !important;
+}
+
+.progress-bar-danger {
+  background-color: #5F2A2A !important;
+}
+
+/* Badge colors override */
+.badge.bg-primary { background-color: #2A3A5F !important; }
+.badge.bg-secondary { background-color: var(--bg-secondary) !important; }
+.badge.bg-success { background-color: #2A5F3A !important; }
+.badge.bg-danger { background-color: #5F2A2A !important; }
+.badge.bg-warning { background-color: #5F4A2A !important; color: #ffffff !important; }
+.badge.bg-info { background-color: #2A4A5F !important; }
+.badge.bg-purple { background-color: #5F2A5F !important; }
+
+/* Additional bright color fixes */
+.text-white { color: #ffffff !important; }
+.text-dark { color: var(--text-primary) !important; }
+
+/* Login/Register page enhancements */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Wallet address display */
+.wallet-address {
+  font-family: 'Courier New', monospace;
+  background: var(--bg-tertiary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  word-break: break-all;
+  font-size: 0.9rem;
+}
+
+/* Spinning animation for refresh button */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}

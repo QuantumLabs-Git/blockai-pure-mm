@@ -1,0 +1,25 @@
+{
+  "name": "blockai-pure-mm-webapp",
+  "version": "1.0.0",
+  "description": "BlockAI Pure MM - Secure Market Making Web Application",
+  "private": true,
+  "scripts": {
+    "start": "node start-ngrok-ready.js",
+    "dev": "node start-ngrok-ready.js",
+    "dev:vite": "node vite-server.js",
+    "start:proxy": "node start.js dev",
+    "start:prod": "node start.js production",
+    "start:old": "node start-app.js",
+    "build": "cd client && npm run build",
+    "install:all": "npm run install:server && npm run install:client",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "setup": "npm run install:all && cd server && cp -n .env.example .env || true",
+    "services:start": "cd server && npm run services:start",
+    "services:stop": "cd server && npm run services:stop",
+    "clean": "rm -rf server/node_modules client/node_modules"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,40 @@
+<!-- templates/multisender.html -->
+{% extends "base.html" %}
+
+{% block title %}Multisender - BlockAI Pure MM{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Multisender</h1>
+    <div class="card">
+        <div class="card-body">
+            <p>This is the multisender page. You'll be able to send tokens to multiple addresses in a single transaction.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Standard Multisend</h5>
+                            <p class="card-text">Send tokens to multiple addresses in a single transaction with optimized gas usage.</p>
+                            <a href="#" class="btn btn-primary">Use Standard Multisender</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Privacy Transfers</h5>
+                            <p class="card-text">Send tokens with enhanced privacy features through HoudiniSwap integration.</p>
+                            <a href="{{ url_for('privacy_transfers') }}" class="btn btn-primary">Use Privacy Transfers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info mt-4">
+                Additional multisender features will be implemented later.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
