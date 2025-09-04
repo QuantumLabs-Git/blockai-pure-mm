@@ -1,0 +1,20 @@
+{
+  "ServiceName": "blockai-pure-mm",
+  "SourceConfiguration": {
+    "ImageRepository": {
+      "ImageIdentifier": "894059646844.dkr.ecr.us-east-1.amazonaws.com/blockai-pure-mm:latest",
+      "ImageConfiguration": {
+        "Port": "5000",
+        "RuntimeEnvironmentVariables": {
+          "FLASK_ENV": "production",
+          "NODE_OPTIONS": "--max-old-space-size=512"
+        }
+      },
+      "ImageRepositoryType": "ECR"
+    },
+    "AutoDeploymentsEnabled": false,
+    "AuthenticationConfiguration": {
+      "AccessRoleArn": "arn:aws:iam::894059646844:role/AppRunnerECRAccessRole"
+    }
+  }
+}
