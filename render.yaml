@@ -1,0 +1,41 @@
+# Render.com Deployment Configuration
+# Free tier deployment option for BlockAI Pure MM
+
+services:
+  # Web Service
+  - type: web
+    name: blockai-pure-mm
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    region: oregon
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=512
+      - key: DEVNET_MODE
+        value: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: MAINNET_RPC_URL
+        value: https://mainnet.helius-rpc.com/?api-key=c3ccc39d-a8c8-40ec-880d-40ac14e92533
+      - key: REDIS_URL
+        fromService:
+          name: blockai-redis
+          type: redis
+          property: connectionString
+
+  # Redis Service (if using paid plan)
+  # - type: redis
+  #   name: blockai-redis
+  #   plan: free
+  #   maxmemoryPolicy: allkeys-lru

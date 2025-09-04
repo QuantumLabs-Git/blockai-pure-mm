@@ -32,27 +32,27 @@
       "secrets": [
         {
           "name": "SUPABASE_URL",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/supabase_url"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/supabase_url"
         },
         {
           "name": "SUPABASE_ANON_KEY",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/supabase_anon_key"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/supabase_anon_key"
         },
         {
           "name": "SUPABASE_SERVICE_KEY",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/supabase_service_key"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/supabase_service_key"
         },
         {
           "name": "SECRET_KEY",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/flask_secret_key"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/flask_secret_key"
         },
         {
           "name": "MAINNET_RPC_URL",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/mainnet_rpc_url"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/mainnet_rpc_url"
         },
         {
           "name": "REDIS_URL",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:YOUR_ACCOUNT:secret:blockai/redis_url"
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:894059646844:secret:blockai/redis_url"
         }
       ],
       "mountPoints": [
@@ -95,6 +95,6 @@
       }
     }
   ],
-  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT:role/ecsTaskRole"
+  "executionRoleArn": "arn:aws:iam::894059646844:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::894059646844:role/ecsTaskRole"
 }
